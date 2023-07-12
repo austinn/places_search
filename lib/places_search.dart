@@ -8,6 +8,10 @@ import 'package:places_search/model/prediction.dart';
 import 'package:dio/dio.dart';
 import 'package:rxdart/rxdart.dart';
 
+export 'package:places_search/model/place_details.dart';
+export 'package:places_search/model/places_response.dart';
+export 'package:places_search/model/prediction.dart';
+
 class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   final InputDecoration inputDecoration;
   final ValueChanged<Prediction>? onItemClicked;
