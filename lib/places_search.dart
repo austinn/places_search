@@ -29,7 +29,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
     required this.googleAPIKey,
     this.onItemClicked,
     this.getPlaceDetails,
-    this.debounceTime = 600,
+    this.debounceTime = 500,
     this.inputDecoration = const InputDecoration(),
     this.isLatLngRequired = true,
     this.textStyle = const TextStyle(),
@@ -46,6 +46,7 @@ class _GooglePlaceAutoCompleteTextFieldState
   final subject = new PublishSubject<String>();
   OverlayEntry? _overlayEntry;
   List<Prediction> alPredictions = [];
+  bool isLoading = false;
 
   TextEditingController controller = TextEditingController();
   final LayerLink _layerLink = LayerLink();
@@ -56,10 +57,25 @@ class _GooglePlaceAutoCompleteTextFieldState
     return CompositedTransformTarget(
       link: _layerLink,
       child: TextFormField(
-        decoration: widget.inputDecoration,
+        decoration: widget.inputDecoration.copyWith(
+          suffix: isLoading
+              ? SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.0,
+                  ),
+                )
+              : widget.inputDecoration.suffix,
+        ),
         style: widget.textStyle,
         controller: widget.textEditingController,
-        onChanged: (string) => (subject.add(string)),
+        onChanged: (string) {
+          setState(() {
+            isLoading = string.isNotEmpty;
+          });
+          subject.add(string);
+        },
       ),
     );
   }
@@ -100,6 +116,9 @@ class _GooglePlaceAutoCompleteTextFieldState
     this._overlayEntry = null;
     this._overlayEntry = this._createOverlayEntry();
     Overlay.of(context).insert(this._overlayEntry!);
+    setState(() {
+      isLoading = false;
+    });
     //   this._overlayEntry.markNeedsBuild();
   }
 
