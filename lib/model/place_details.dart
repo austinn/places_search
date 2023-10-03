@@ -1,234 +1,543 @@
+import 'dart:convert';
+
 class PlaceDetails {
-  Result? result;
-  String? status;
+  List<dynamic> htmlAttributions;
+  Result result;
+  String status;
 
-  PlaceDetails({this.result, this.status});
+  PlaceDetails({
+    required this.htmlAttributions,
+    required this.result,
+    required this.status,
+  });
 
-  PlaceDetails.fromJson(Map<String, dynamic> json) {
-    result =
-        json['result'] != null ? new Result.fromJson(json['result']) : null;
-    status = json['status'];
-  }
+  factory PlaceDetails.fromRawJson(String str) =>
+      PlaceDetails.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+  String toRawJson() => json.encode(toJson());
 
-    if (this.result != null) {
-      data['result'] = this.result!.toJson();
-    }
-    data['status'] = this.status;
-    return data;
-  }
+  factory PlaceDetails.fromJson(Map<String, dynamic> json) => PlaceDetails(
+        htmlAttributions:
+            List<dynamic>.from(json['html_attributions'].map((x) => x)),
+        result: Result.fromJson(json['result']),
+        status: json['status'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'html_attributions': List<dynamic>.from(htmlAttributions.map((x) => x)),
+        'result': result.toJson(),
+        'status': status,
+      };
 }
 
 class Result {
-  List<AddressComponents>? addressComponents;
-  String? adrAddress;
-  String? formattedAddress;
-  Geometry? geometry;
-  String? icon;
-  String? name;
-  List<Photos>? photos;
-  String? placeId;
-  String? reference;
-  String? scope;
-  List<String>? types;
-  String? url;
-  int? utcOffset;
-  String? vicinity;
-  String? website;
+  List<AddressComponent> addressComponents;
+  String adrAddress;
+  String businessStatus;
+  CurrentOpeningHours currentOpeningHours;
+  String formattedAddress;
+  String formattedPhoneNumber;
+  Geometry geometry;
+  String icon;
+  String iconBackgroundColor;
+  String iconMaskBaseUri;
+  String internationalPhoneNumber;
+  String name;
+  OpeningHours openingHours;
+  List<Photo> photos;
+  String placeId;
+  PlusCode plusCode;
+  double rating;
+  String reference;
+  List<Review> reviews;
+  List<String> types;
+  String url;
+  int userRatingsTotal;
+  int utcOffset;
+  String vicinity;
+  String website;
+  bool wheelchairAccessibleEntrance;
 
-  Result(
-      {this.addressComponents,
-      this.adrAddress,
-      this.formattedAddress,
-      this.geometry,
-      this.icon,
-      this.name,
-      this.photos,
-      this.placeId,
-      this.reference,
-      this.scope,
-      this.types,
-      this.url,
-      this.utcOffset,
-      this.vicinity,
-      this.website});
+  Result({
+    required this.addressComponents,
+    required this.adrAddress,
+    required this.businessStatus,
+    required this.currentOpeningHours,
+    required this.formattedAddress,
+    required this.formattedPhoneNumber,
+    required this.geometry,
+    required this.icon,
+    required this.iconBackgroundColor,
+    required this.iconMaskBaseUri,
+    required this.internationalPhoneNumber,
+    required this.name,
+    required this.openingHours,
+    required this.photos,
+    required this.placeId,
+    required this.plusCode,
+    required this.rating,
+    required this.reference,
+    required this.reviews,
+    required this.types,
+    required this.url,
+    required this.userRatingsTotal,
+    required this.utcOffset,
+    required this.vicinity,
+    required this.website,
+    required this.wheelchairAccessibleEntrance,
+  });
 
-  Result.fromJson(Map<String, dynamic> json) {
-    if (json['address_components'] != null) {
-      addressComponents = [];
-      json['address_components'].forEach((v) {
-        addressComponents!.add(new AddressComponents.fromJson(v));
-      });
-    }
-    adrAddress = json['adr_address'];
-    formattedAddress = json['formatted_address'];
-    geometry = json['geometry'] != null
-        ? new Geometry.fromJson(json['geometry'])
-        : null;
-    icon = json['icon'];
-    name = json['name'];
-    if (json['photos'] != null) {
-      photos =[];
-      json['photos'].forEach((v) {
-        photos!.add(new Photos.fromJson(v));
-      });
-    }
-    placeId = json['place_id'];
-    reference = json['reference'];
-    scope = json['scope'];
-    types = json['types'].cast<String>();
-    url = json['url'];
-    utcOffset = json['utc_offset'];
-    vicinity = json['vicinity'];
-    website = json['website'];
-  }
+  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.addressComponents != null) {
-      data['address_components'] =
-          this.addressComponents!.map((v) => v.toJson()).toList();
-    }
-    data['adr_address'] = this.adrAddress;
-    data['formatted_address'] = this.formattedAddress;
-    if (this.geometry != null) {
-      data['geometry'] = this.geometry!.toJson();
-    }
-    data['icon'] = this.icon;
-    data['name'] = this.name;
-    if (this.photos != null) {
-      data['photos'] = this.photos!.map((v) => v.toJson()).toList();
-    }
-    data['place_id'] = this.placeId;
-    data['reference'] = this.reference;
-    data['scope'] = this.scope;
-    data['types'] = this.types;
-    data['url'] = this.url;
-    data['utc_offset'] = this.utcOffset;
-    data['vicinity'] = this.vicinity;
-    data['website'] = this.website;
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory Result.fromJson(Map<String, dynamic> json) => Result(
+        addressComponents: List<AddressComponent>.from(
+            json['address_components']
+                .map((x) => AddressComponent.fromJson(x))),
+        adrAddress: json['adr_address'],
+        businessStatus: json['business_status'],
+        currentOpeningHours:
+            CurrentOpeningHours.fromJson(json['current_opening_hours']),
+        formattedAddress: json['formatted_address'],
+        formattedPhoneNumber: json['formatted_phone_number'],
+        geometry: Geometry.fromJson(json['geometry']),
+        icon: json['icon'],
+        iconBackgroundColor: json['icon_background_color'],
+        iconMaskBaseUri: json['icon_mask_base_uri'],
+        internationalPhoneNumber: json['international_phone_number'],
+        name: json['name'],
+        openingHours: OpeningHours.fromJson(json['opening_hours']),
+        photos: List<Photo>.from(json['photos'].map((x) => Photo.fromJson(x))),
+        placeId: json['place_id'],
+        plusCode: PlusCode.fromJson(json['plus_code']),
+        rating: json['rating']?.toDouble(),
+        reference: json['reference'],
+        reviews:
+            List<Review>.from(json['reviews'].map((x) => Review.fromJson(x))),
+        types: List<String>.from(json['types'].map((x) => x)),
+        url: json['url'],
+        userRatingsTotal: json['user_ratings_total'],
+        utcOffset: json['utc_offset'],
+        vicinity: json['vicinity'],
+        website: json['website'],
+        wheelchairAccessibleEntrance: json['wheelchair_accessible_entrance'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'address_components':
+            List<dynamic>.from(addressComponents.map((x) => x.toJson())),
+        'adr_address': adrAddress,
+        'business_status': businessStatus,
+        'current_opening_hours': currentOpeningHours.toJson(),
+        'formatted_address': formattedAddress,
+        'formatted_phone_number': formattedPhoneNumber,
+        'geometry': geometry.toJson(),
+        'icon': icon,
+        'icon_background_color': iconBackgroundColor,
+        'icon_mask_base_uri': iconMaskBaseUri,
+        'international_phone_number': internationalPhoneNumber,
+        'name': name,
+        'opening_hours': openingHours.toJson(),
+        'photos': List<dynamic>.from(photos.map((x) => x.toJson())),
+        'place_id': placeId,
+        'plus_code': plusCode.toJson(),
+        'rating': rating,
+        'reference': reference,
+        'reviews': List<dynamic>.from(reviews.map((x) => x.toJson())),
+        'types': List<dynamic>.from(types.map((x) => x)),
+        'url': url,
+        'user_ratings_total': userRatingsTotal,
+        'utc_offset': utcOffset,
+        'vicinity': vicinity,
+        'website': website,
+        'wheelchair_accessible_entrance': wheelchairAccessibleEntrance,
+      };
 }
 
-class AddressComponents {
-  String? longName;
-  String? shortName;
-  List<String>? types;
+class AddressComponent {
+  String longName;
+  String shortName;
+  List<String> types;
 
-  AddressComponents({this.longName, this.shortName, this.types});
+  AddressComponent({
+    required this.longName,
+    required this.shortName,
+    required this.types,
+  });
 
-  AddressComponents.fromJson(Map<String, dynamic> json) {
-    longName = json['long_name'];
-    shortName = json['short_name'];
-    types = json['types'].cast<String>();
-  }
+  factory AddressComponent.fromRawJson(String str) =>
+      AddressComponent.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['long_name'] = this.longName;
-    data['short_name'] = this.shortName;
-    data['types'] = this.types;
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory AddressComponent.fromJson(Map<String, dynamic> json) =>
+      AddressComponent(
+        longName: json['long_name'],
+        shortName: json['short_name'],
+        types: List<String>.from(json['types'].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'long_name': longName,
+        'short_name': shortName,
+        'types': List<dynamic>.from(types.map((x) => x)),
+      };
+}
+
+class CurrentOpeningHours {
+  bool openNow;
+  List<CurrentOpeningHoursPeriod> periods;
+  List<String> weekdayText;
+
+  CurrentOpeningHours({
+    required this.openNow,
+    required this.periods,
+    required this.weekdayText,
+  });
+
+  factory CurrentOpeningHours.fromRawJson(String str) =>
+      CurrentOpeningHours.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory CurrentOpeningHours.fromJson(Map<String, dynamic> json) =>
+      CurrentOpeningHours(
+        openNow: json['open_now'],
+        periods: List<CurrentOpeningHoursPeriod>.from(
+            json['periods'].map((x) => CurrentOpeningHoursPeriod.fromJson(x))),
+        weekdayText: List<String>.from(json['weekday_text'].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'open_now': openNow,
+        'periods': List<dynamic>.from(periods.map((x) => x.toJson())),
+        'weekday_text': List<dynamic>.from(weekdayText.map((x) => x)),
+      };
+}
+
+class CurrentOpeningHoursPeriod {
+  PurpleClose close;
+  PurpleClose open;
+
+  CurrentOpeningHoursPeriod({
+    required this.close,
+    required this.open,
+  });
+
+  factory CurrentOpeningHoursPeriod.fromRawJson(String str) =>
+      CurrentOpeningHoursPeriod.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory CurrentOpeningHoursPeriod.fromJson(Map<String, dynamic> json) =>
+      CurrentOpeningHoursPeriod(
+        close: PurpleClose.fromJson(json['close']),
+        open: PurpleClose.fromJson(json['open']),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'close': close.toJson(),
+        'open': open.toJson(),
+      };
+}
+
+class PurpleClose {
+  DateTime date;
+  int day;
+  String time;
+
+  PurpleClose({
+    required this.date,
+    required this.day,
+    required this.time,
+  });
+
+  factory PurpleClose.fromRawJson(String str) =>
+      PurpleClose.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory PurpleClose.fromJson(Map<String, dynamic> json) => PurpleClose(
+        date: DateTime.parse(json['date']),
+        day: json['day'],
+        time: json['time'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'date':
+            "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
+        'day': day,
+        'time': time,
+      };
 }
 
 class Geometry {
-  Location? location;
-  Viewport? viewport;
+  Location location;
+  Viewport viewport;
 
-  Geometry({this.location, this.viewport});
+  Geometry({
+    required this.location,
+    required this.viewport,
+  });
 
-  Geometry.fromJson(Map<String, dynamic> json) {
-    location = json['location'] != null
-        ? new Location.fromJson(json['location'])
-        : null;
-    viewport = json['viewport'] != null
-        ? new Viewport.fromJson(json['viewport'])
-        : null;
-  }
+  factory Geometry.fromRawJson(String str) =>
+      Geometry.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.location != null) {
-      data['location'] = this.location!.toJson();
-    }
-    if (this.viewport != null) {
-      data['viewport'] = this.viewport!.toJson();
-    }
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory Geometry.fromJson(Map<String, dynamic> json) => Geometry(
+        location: Location.fromJson(json['location']),
+        viewport: Viewport.fromJson(json['viewport']),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'location': location.toJson(),
+        'viewport': viewport.toJson(),
+      };
 }
 
 class Location {
-  double? lat;
-  double? lng;
+  double lat;
+  double lng;
 
-  Location({this.lat, this.lng});
+  Location({
+    required this.lat,
+    required this.lng,
+  });
 
-  Location.fromJson(Map<String, dynamic> json) {
-    lat = json['lat'];
-    lng = json['lng'];
-  }
+  factory Location.fromRawJson(String str) =>
+      Location.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['lat'] = this.lat;
-    data['lng'] = this.lng;
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory Location.fromJson(Map<String, dynamic> json) => Location(
+        lat: json['lat']?.toDouble(),
+        lng: json['lng']?.toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'lat': lat,
+        'lng': lng,
+      };
 }
 
 class Viewport {
-  Location? northeast;
-  Location? southwest;
+  Location northeast;
+  Location southwest;
 
-  Viewport({this.northeast, this.southwest});
+  Viewport({
+    required this.northeast,
+    required this.southwest,
+  });
 
-  Viewport.fromJson(Map<String, dynamic> json) {
-    northeast = json['northeast'] != null
-        ? new Location.fromJson(json['northeast'])
-        : null;
-    southwest = json['southwest'] != null
-        ? new Location.fromJson(json['southwest'])
-        : null;
-  }
+  factory Viewport.fromRawJson(String str) =>
+      Viewport.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.northeast != null) {
-      data['northeast'] = this.northeast!.toJson();
-    }
-    if (this.southwest != null) {
-      data['southwest'] = this.southwest!.toJson();
-    }
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory Viewport.fromJson(Map<String, dynamic> json) => Viewport(
+        northeast: Location.fromJson(json['northeast']),
+        southwest: Location.fromJson(json['southwest']),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'northeast': northeast.toJson(),
+        'southwest': southwest.toJson(),
+      };
 }
 
-class Photos {
-  int? height;
-  List<String>? htmlAttributions;
-  String? photoReference;
-  int? width;
+class OpeningHours {
+  bool openNow;
+  List<OpeningHoursPeriod> periods;
+  List<String> weekdayText;
 
-  Photos({this.height, this.htmlAttributions, this.photoReference, this.width});
+  OpeningHours({
+    required this.openNow,
+    required this.periods,
+    required this.weekdayText,
+  });
 
-  Photos.fromJson(Map<String, dynamic> json) {
-    height = json['height'];
-    htmlAttributions = json['html_attributions'].cast<String>();
-    photoReference = json['photo_reference'];
-    width = json['width'];
-  }
+  factory OpeningHours.fromRawJson(String str) =>
+      OpeningHours.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['height'] = this.height;
-    data['html_attributions'] = this.htmlAttributions;
-    data['photo_reference'] = this.photoReference;
-    data['width'] = this.width;
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory OpeningHours.fromJson(Map<String, dynamic> json) => OpeningHours(
+        openNow: json['open_now'],
+        periods: List<OpeningHoursPeriod>.from(
+            json['periods'].map((x) => OpeningHoursPeriod.fromJson(x))),
+        weekdayText: List<String>.from(json['weekday_text'].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'open_now': openNow,
+        'periods': List<dynamic>.from(periods.map((x) => x.toJson())),
+        'weekday_text': List<dynamic>.from(weekdayText.map((x) => x)),
+      };
+}
+
+class OpeningHoursPeriod {
+  FluffyClose close;
+  FluffyClose open;
+
+  OpeningHoursPeriod({
+    required this.close,
+    required this.open,
+  });
+
+  factory OpeningHoursPeriod.fromRawJson(String str) =>
+      OpeningHoursPeriod.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory OpeningHoursPeriod.fromJson(Map<String, dynamic> json) =>
+      OpeningHoursPeriod(
+        close: FluffyClose.fromJson(json['close']),
+        open: FluffyClose.fromJson(json['open']),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'close': close.toJson(),
+        'open': open.toJson(),
+      };
+}
+
+class FluffyClose {
+  int day;
+  String time;
+
+  FluffyClose({
+    required this.day,
+    required this.time,
+  });
+
+  factory FluffyClose.fromRawJson(String str) =>
+      FluffyClose.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory FluffyClose.fromJson(Map<String, dynamic> json) => FluffyClose(
+        day: json['day'],
+        time: json['time'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'day': day,
+        'time': time,
+      };
+}
+
+class Photo {
+  int height;
+  List<String> htmlAttributions;
+  String photoReference;
+  int width;
+
+  Photo({
+    required this.height,
+    required this.htmlAttributions,
+    required this.photoReference,
+    required this.width,
+  });
+
+  factory Photo.fromRawJson(String str) => Photo.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory Photo.fromJson(Map<String, dynamic> json) => Photo(
+        height: json['height'],
+        htmlAttributions:
+            List<String>.from(json['html_attributions'].map((x) => x)),
+        photoReference: json['photo_reference'],
+        width: json['width'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'height': height,
+        'html_attributions': List<dynamic>.from(htmlAttributions.map((x) => x)),
+        'photo_reference': photoReference,
+        'width': width,
+      };
+}
+
+class PlusCode {
+  String compoundCode;
+  String globalCode;
+
+  PlusCode({
+    required this.compoundCode,
+    required this.globalCode,
+  });
+
+  factory PlusCode.fromRawJson(String str) =>
+      PlusCode.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory PlusCode.fromJson(Map<String, dynamic> json) => PlusCode(
+        compoundCode: json['compound_code'],
+        globalCode: json['global_code'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'compound_code': compoundCode,
+        'global_code': globalCode,
+      };
+}
+
+class Review {
+  String authorName;
+  String authorUrl;
+  String language;
+  String originalLanguage;
+  String profilePhotoUrl;
+  int rating;
+  String relativeTimeDescription;
+  String text;
+  int time;
+  bool translated;
+
+  Review({
+    required this.authorName,
+    required this.authorUrl,
+    required this.language,
+    required this.originalLanguage,
+    required this.profilePhotoUrl,
+    required this.rating,
+    required this.relativeTimeDescription,
+    required this.text,
+    required this.time,
+    required this.translated,
+  });
+
+  factory Review.fromRawJson(String str) => Review.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory Review.fromJson(Map<String, dynamic> json) => Review(
+        authorName: json['author_name'],
+        authorUrl: json['author_url'],
+        language: json['language'],
+        originalLanguage: json['original_language'],
+        profilePhotoUrl: json['profile_photo_url'],
+        rating: json['rating'],
+        relativeTimeDescription: json['relative_time_description'],
+        text: json['text'],
+        time: json['time'],
+        translated: json['translated'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'author_name': authorName,
+        'author_url': authorUrl,
+        'language': language,
+        'original_language': originalLanguage,
+        'profile_photo_url': profilePhotoUrl,
+        'rating': rating,
+        'relative_time_description': relativeTimeDescription,
+        'text': text,
+        'time': time,
+        'translated': translated,
+      };
 }
