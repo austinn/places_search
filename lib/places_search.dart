@@ -98,6 +98,7 @@ class PlaceAutoCompleteTextFieldState
     }
 
     Response response = await dio.get(url);
+
     PlacesResponse subscriptionResponse =
         PlacesResponse.fromJson(response.data);
 
@@ -167,7 +168,8 @@ class PlaceAutoCompleteTextFieldState
                                 if (!widget.isLatLngRequired) return;
 
                                 getPlaceDetailsFromPlaceId(
-                                    alPredictions[index]);
+                                  alPredictions[index],
+                                );
 
                                 removeOverlay();
                               }

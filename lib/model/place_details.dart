@@ -14,12 +14,14 @@ class PlaceDetails {
     required this.status,
   });
 
-  factory PlaceDetails.fromRawJson(String str) => PlaceDetails.fromJson(json.decode(str));
+  factory PlaceDetails.fromRawJson(String str) =>
+      PlaceDetails.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
   factory PlaceDetails.fromJson(Map<String, dynamic> json) => PlaceDetails(
-        htmlAttributions: List<dynamic>.from(json['html_attributions'].map((x) => x)),
+        htmlAttributions:
+            List<dynamic>.from(json['html_attributions'].map((x) => x)),
         result: Result.fromJson(json['result']),
         status: json['status'],
       );
@@ -34,58 +36,72 @@ class PlaceDetails {
 class Result {
   List<AddressComponent> addressComponents;
   String adrAddress;
-  String businessStatus;
-  CurrentOpeningHours currentOpeningHours;
+  String? businessStatus;
+  bool? curbsidePickup;
+  CurrentOpeningHours? currentOpeningHours;
+  bool? delivery;
+  bool? dineIn;
+  EditorialSummary? editorialSummary;
   String formattedAddress;
-  String formattedPhoneNumber;
+  String? formattedPhoneNumber;
   Geometry geometry;
   String icon;
   String iconBackgroundColor;
   String iconMaskBaseUri;
-  String internationalPhoneNumber;
+  String? internationalPhoneNumber;
   String name;
-  OpeningHours openingHours;
-  List<Photo> photos;
+  OpeningHours? openingHours;
+  List<Photo>? photos;
   String placeId;
-  PlusCode plusCode;
-  double rating;
+  PlusCode? plusCode;
+  int? priceLevel;
+  double? rating;
   String reference;
-  List<Review> reviews;
+  List<Review>? reviews;
+  bool? servesBeer;
+  bool? takeout;
   List<String> types;
   String url;
-  int userRatingsTotal;
+  int? userRatingsTotal;
   int utcOffset;
   String vicinity;
-  String website;
-  bool wheelchairAccessibleEntrance;
+  String? website;
+  bool? wheelchairAccessibleEntrance;
 
   Result({
     required this.addressComponents,
     required this.adrAddress,
-    required this.businessStatus,
-    required this.currentOpeningHours,
+    this.businessStatus,
+    this.curbsidePickup,
+    this.currentOpeningHours,
+    this.delivery,
+    this.dineIn,
+    this.editorialSummary,
     required this.formattedAddress,
-    required this.formattedPhoneNumber,
+    this.formattedPhoneNumber,
     required this.geometry,
     required this.icon,
     required this.iconBackgroundColor,
     required this.iconMaskBaseUri,
-    required this.internationalPhoneNumber,
+    this.internationalPhoneNumber,
     required this.name,
-    required this.openingHours,
-    required this.photos,
+    this.openingHours,
+    this.photos,
     required this.placeId,
-    required this.plusCode,
-    required this.rating,
+    this.plusCode,
+    this.priceLevel,
+    this.rating,
     required this.reference,
-    required this.reviews,
+    this.reviews,
+    this.servesBeer,
+    this.takeout,
     required this.types,
     required this.url,
-    required this.userRatingsTotal,
+    this.userRatingsTotal,
     required this.utcOffset,
     required this.vicinity,
-    required this.website,
-    required this.wheelchairAccessibleEntrance,
+    this.website,
+    this.wheelchairAccessibleEntrance,
   });
 
   factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
@@ -93,11 +109,20 @@ class Result {
   String toRawJson() => json.encode(toJson());
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-        addressComponents:
-            List<AddressComponent>.from(json['address_components'].map((x) => AddressComponent.fromJson(x))),
+        addressComponents: List<AddressComponent>.from(
+            json['address_components']
+                .map((x) => AddressComponent.fromJson(x))),
         adrAddress: json['adr_address'],
         businessStatus: json['business_status'],
-        currentOpeningHours: CurrentOpeningHours.fromJson(json['current_opening_hours']),
+        curbsidePickup: json['curbside_pickup'],
+        currentOpeningHours: json['current_opening_hours'] == null
+            ? null
+            : CurrentOpeningHours.fromJson(json['current_opening_hours']),
+        delivery: json['delivery'],
+        dineIn: json['dine_in'],
+        editorialSummary: json['editorial_summary'] == null
+            ? null
+            : EditorialSummary.fromJson(json['editorial_summary']),
         formattedAddress: json['formatted_address'],
         formattedPhoneNumber: json['formatted_phone_number'],
         geometry: Geometry.fromJson(json['geometry']),
@@ -106,13 +131,25 @@ class Result {
         iconMaskBaseUri: json['icon_mask_base_uri'],
         internationalPhoneNumber: json['international_phone_number'],
         name: json['name'],
-        openingHours: OpeningHours.fromJson(json['opening_hours']),
-        photos: List<Photo>.from(json['photos'].map((x) => Photo.fromJson(x))),
+        openingHours: json['opening_hours'] == null
+            ? null
+            : OpeningHours.fromJson(json['opening_hours']),
+        photos: json['photos'] == null
+            ? []
+            : List<Photo>.from(json['photos']!.map((x) => Photo.fromJson(x))),
         placeId: json['place_id'],
-        plusCode: PlusCode.fromJson(json['plus_code']),
+        plusCode: json['plus_code'] == null
+            ? null
+            : PlusCode.fromJson(json['plus_code']),
+        priceLevel: json['price_level'],
         rating: json['rating']?.toDouble(),
         reference: json['reference'],
-        reviews: List<Review>.from(json['reviews'].map((x) => Review.fromJson(x))),
+        reviews: json['reviews'] == null
+            ? []
+            : List<Review>.from(
+                json['reviews']!.map((x) => Review.fromJson(x))),
+        servesBeer: json['serves_beer'],
+        takeout: json['takeout'],
         types: List<String>.from(json['types'].map((x) => x)),
         url: json['url'],
         userRatingsTotal: json['user_ratings_total'],
@@ -123,10 +160,15 @@ class Result {
       );
 
   Map<String, dynamic> toJson() => {
-        'address_components': List<dynamic>.from(addressComponents.map((x) => x.toJson())),
+        'address_components':
+            List<dynamic>.from(addressComponents.map((x) => x.toJson())),
         'adr_address': adrAddress,
         'business_status': businessStatus,
-        'current_opening_hours': currentOpeningHours.toJson(),
+        'curbside_pickup': curbsidePickup,
+        'current_opening_hours': currentOpeningHours?.toJson(),
+        'delivery': delivery,
+        'dine_in': dineIn,
+        'editorial_summary': editorialSummary?.toJson(),
         'formatted_address': formattedAddress,
         'formatted_phone_number': formattedPhoneNumber,
         'geometry': geometry.toJson(),
@@ -135,13 +177,20 @@ class Result {
         'icon_mask_base_uri': iconMaskBaseUri,
         'international_phone_number': internationalPhoneNumber,
         'name': name,
-        'opening_hours': openingHours.toJson(),
-        'photos': List<dynamic>.from(photos.map((x) => x.toJson())),
+        'opening_hours': openingHours?.toJson(),
+        'photos': photos == null
+            ? []
+            : List<dynamic>.from(photos!.map((x) => x.toJson())),
         'place_id': placeId,
-        'plus_code': plusCode.toJson(),
+        'plus_code': plusCode?.toJson(),
+        'price_level': priceLevel,
         'rating': rating,
         'reference': reference,
-        'reviews': List<dynamic>.from(reviews.map((x) => x.toJson())),
+        'reviews': reviews == null
+            ? []
+            : List<dynamic>.from(reviews!.map((x) => x.toJson())),
+        'serves_beer': servesBeer,
+        'takeout': takeout,
         'types': List<dynamic>.from(types.map((x) => x)),
         'url': url,
         'user_ratings_total': userRatingsTotal,
@@ -163,11 +212,13 @@ class AddressComponent {
     required this.types,
   });
 
-  factory AddressComponent.fromRawJson(String str) => AddressComponent.fromJson(json.decode(str));
+  factory AddressComponent.fromRawJson(String str) =>
+      AddressComponent.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory AddressComponent.fromJson(Map<String, dynamic> json) => AddressComponent(
+  factory AddressComponent.fromJson(Map<String, dynamic> json) =>
+      AddressComponent(
         longName: json['long_name'],
         shortName: json['short_name'],
         types: List<String>.from(json['types'].map((x) => x)),
@@ -191,14 +242,16 @@ class CurrentOpeningHours {
     required this.weekdayText,
   });
 
-  factory CurrentOpeningHours.fromRawJson(String str) => CurrentOpeningHours.fromJson(json.decode(str));
+  factory CurrentOpeningHours.fromRawJson(String str) =>
+      CurrentOpeningHours.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory CurrentOpeningHours.fromJson(Map<String, dynamic> json) => CurrentOpeningHours(
+  factory CurrentOpeningHours.fromJson(Map<String, dynamic> json) =>
+      CurrentOpeningHours(
         openNow: json['open_now'],
-        periods:
-            List<CurrentOpeningHoursPeriod>.from(json['periods'].map((x) => CurrentOpeningHoursPeriod.fromJson(x))),
+        periods: List<CurrentOpeningHoursPeriod>.from(
+            json['periods'].map((x) => CurrentOpeningHoursPeriod.fromJson(x))),
         weekdayText: List<String>.from(json['weekday_text'].map((x) => x)),
       );
 
@@ -218,11 +271,13 @@ class CurrentOpeningHoursPeriod {
     required this.open,
   });
 
-  factory CurrentOpeningHoursPeriod.fromRawJson(String str) => CurrentOpeningHoursPeriod.fromJson(json.decode(str));
+  factory CurrentOpeningHoursPeriod.fromRawJson(String str) =>
+      CurrentOpeningHoursPeriod.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory CurrentOpeningHoursPeriod.fromJson(Map<String, dynamic> json) => CurrentOpeningHoursPeriod(
+  factory CurrentOpeningHoursPeriod.fromJson(Map<String, dynamic> json) =>
+      CurrentOpeningHoursPeriod(
         close: PurpleClose.fromJson(json['close']),
         open: PurpleClose.fromJson(json['open']),
       );
@@ -244,7 +299,8 @@ class PurpleClose {
     required this.time,
   });
 
-  factory PurpleClose.fromRawJson(String str) => PurpleClose.fromJson(json.decode(str));
+  factory PurpleClose.fromRawJson(String str) =>
+      PurpleClose.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -262,6 +318,32 @@ class PurpleClose {
       };
 }
 
+class EditorialSummary {
+  String language;
+  String overview;
+
+  EditorialSummary({
+    required this.language,
+    required this.overview,
+  });
+
+  factory EditorialSummary.fromRawJson(String str) =>
+      EditorialSummary.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory EditorialSummary.fromJson(Map<String, dynamic> json) =>
+      EditorialSummary(
+        language: json['language'],
+        overview: json['overview'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'language': language,
+        'overview': overview,
+      };
+}
+
 class Geometry {
   Location location;
   Viewport viewport;
@@ -271,7 +353,8 @@ class Geometry {
     required this.viewport,
   });
 
-  factory Geometry.fromRawJson(String str) => Geometry.fromJson(json.decode(str));
+  factory Geometry.fromRawJson(String str) =>
+      Geometry.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -295,7 +378,8 @@ class Location {
     required this.lng,
   });
 
-  factory Location.fromRawJson(String str) => Location.fromJson(json.decode(str));
+  factory Location.fromRawJson(String str) =>
+      Location.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -319,7 +403,8 @@ class Viewport {
     required this.southwest,
   });
 
-  factory Viewport.fromRawJson(String str) => Viewport.fromJson(json.decode(str));
+  factory Viewport.fromRawJson(String str) =>
+      Viewport.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -364,26 +449,21 @@ class OpeningHours {
   List<OpeningHoursPeriod> periods;
   List<String> weekdayText;
 
-  @override
-  String toString() {
-    return 'OpeningHours{openNow: $openNow, periods: ${periods.map(
-      (e) => e.toString(),
-    )}, weekdayText: $weekdayText}';
-  }
-
   OpeningHours({
     required this.openNow,
     required this.periods,
     required this.weekdayText,
   });
 
-  factory OpeningHours.fromRawJson(String str) => OpeningHours.fromJson(json.decode(str));
+  factory OpeningHours.fromRawJson(String str) =>
+      OpeningHours.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
   factory OpeningHours.fromJson(Map<String, dynamic> json) => OpeningHours(
         openNow: json['open_now'],
-        periods: List<OpeningHoursPeriod>.from(json['periods'].map((x) => OpeningHoursPeriod.fromJson(x))),
+        periods: List<OpeningHoursPeriod>.from(
+            json['periods'].map((x) => OpeningHoursPeriod.fromJson(x))),
         weekdayText: List<String>.from(json['weekday_text'].map((x) => x)),
       );
 
@@ -403,16 +483,13 @@ class OpeningHoursPeriod {
     required this.open,
   });
 
-  @override
-  String toString() {
-    return 'OpeningHoursPeriod{close: ${close.toString()}, open: ${open.toString()}';
-  }
-
-  factory OpeningHoursPeriod.fromRawJson(String str) => OpeningHoursPeriod.fromJson(json.decode(str));
+  factory OpeningHoursPeriod.fromRawJson(String str) =>
+      OpeningHoursPeriod.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory OpeningHoursPeriod.fromJson(Map<String, dynamic> json) => OpeningHoursPeriod(
+  factory OpeningHoursPeriod.fromJson(Map<String, dynamic> json) =>
+      OpeningHoursPeriod(
         close: FluffyClose.fromJson(json['close']),
         open: FluffyClose.fromJson(json['open']),
       );
@@ -427,17 +504,13 @@ class FluffyClose {
   int day;
   String time;
 
-  @override
-  String toString() {
-    return 'FluffyClose{day: $day, time: $time}';
-  }
-
   FluffyClose({
     required this.day,
     required this.time,
   });
 
-  factory FluffyClose.fromRawJson(String str) => FluffyClose.fromJson(json.decode(str));
+  factory FluffyClose.fromRawJson(String str) =>
+      FluffyClose.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -471,7 +544,8 @@ class Photo {
 
   factory Photo.fromJson(Map<String, dynamic> json) => Photo(
         height: json['height'],
-        htmlAttributions: List<String>.from(json['html_attributions'].map((x) => x)),
+        htmlAttributions:
+            List<String>.from(json['html_attributions'].map((x) => x)),
         photoReference: json['photo_reference'],
         width: json['width'],
       );
@@ -493,7 +567,8 @@ class PlusCode {
     required this.globalCode,
   });
 
-  factory PlusCode.fromRawJson(String str) => PlusCode.fromJson(json.decode(str));
+  factory PlusCode.fromRawJson(String str) =>
+      PlusCode.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
