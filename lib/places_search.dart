@@ -13,10 +13,10 @@ export 'package:places_search/model/place_details.dart';
 export 'package:places_search/model/places_response.dart';
 export 'package:places_search/model/prediction.dart';
 
-class GooglePlaceAutoCompleteTextField extends StatefulWidget {
+class PlaceAutoCompleteTextField extends StatefulWidget {
   final InputDecoration inputDecoration;
   final ValueChanged<Prediction>? onItemClicked;
-  final ValueChanged<Prediction>? getPlaceDetails;
+  final ValueChanged<(Prediction, PlaceDetails)>? getPlaceDetails;
   final bool isLatLngRequired;
 
   final TextStyle textStyle;
@@ -25,7 +25,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   final List<String> countries;
   final TextEditingController textEditingController;
 
-  const GooglePlaceAutoCompleteTextField({
+  const PlaceAutoCompleteTextField({
     super.key,
     required this.textEditingController,
     required this.googleAPIKey,
@@ -39,12 +39,12 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   });
 
   @override
-  GooglePlaceAutoCompleteTextFieldState createState() =>
-      GooglePlaceAutoCompleteTextFieldState();
+  PlaceAutoCompleteTextFieldState createState() =>
+      PlaceAutoCompleteTextFieldState();
 }
 
-class GooglePlaceAutoCompleteTextFieldState
-    extends State<GooglePlaceAutoCompleteTextField> {
+class PlaceAutoCompleteTextFieldState
+    extends State<PlaceAutoCompleteTextField> {
   final subject = PublishSubject<String>();
   OverlayEntry? _overlayEntry;
   List<Prediction> alPredictions = [];
@@ -85,7 +85,7 @@ class GooglePlaceAutoCompleteTextFieldState
   getLocation(String text) async {
     Dio dio = Dio();
     String url =
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=${widget.googleAPIKey}';
+        'https://corsproxy.io/?https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=${widget.googleAPIKey}';
 
     for (int i = 0; i < widget.countries.length; i++) {
       String country = widget.countries[i];
@@ -193,7 +193,8 @@ class GooglePlaceAutoCompleteTextFieldState
 
   Future<Response?> getPlaceDetailsFromPlaceId(Prediction prediction) async {
     var url =
-        'https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}';
+        'https://corsproxy.io/?https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}';
+
     Response response = await Dio().get(
       url,
     );
@@ -202,7 +203,9 @@ class GooglePlaceAutoCompleteTextFieldState
       lat: placeDetails.result.geometry.location.lat.toString(),
       lng: placeDetails.result.geometry.location.lng.toString(),
     );
-    if (widget.getPlaceDetails != null) widget.getPlaceDetails!(prediction);
+    if (widget.getPlaceDetails != null) {
+      widget.getPlaceDetails!((prediction, placeDetails));
+    }
     return null;
   }
 }
