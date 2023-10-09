@@ -2,7 +2,6 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:places_search/model/matched_substrings.dart';
-import 'package:places_search/model/place_details.dart';
 import 'package:places_search/model/structuredformatting.dart';
 import 'package:places_search/model/terms.dart';
 
