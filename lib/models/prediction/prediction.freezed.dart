@@ -297,7 +297,7 @@ class _$PredictionImpl implements _Prediction {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PredictionImpl &&

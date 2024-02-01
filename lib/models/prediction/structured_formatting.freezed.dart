@@ -196,7 +196,7 @@ class _$StructuredFormattingImpl implements _StructuredFormatting {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StructuredFormattingImpl &&
