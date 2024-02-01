@@ -6,7 +6,6 @@ part 'opening_hours_period.g.dart';
 
 @freezed
 class OpeningHoursPeriod with _$OpeningHoursPeriod {
-  @JsonSerializable(explicitToJson: true)
   const factory OpeningHoursPeriod({
     required OpeningHoursDetails open,
     OpeningHoursDetails? close,

@@ -25,8 +25,11 @@ Map<String, dynamic> _$$StructuredFormattingImplToJson(
         _$StructuredFormattingImpl instance) =>
     <String, dynamic>{
       'main_text': instance.mainText,
-      'main_text_matched_substrings': instance.mainTextMatchedSubstrings,
+      'main_text_matched_substrings':
+          instance.mainTextMatchedSubstrings.map((e) => e.toJson()).toList(),
       'secondary_text': instance.secondaryText,
-      'secondary_text_matched_substrings':
-          instance.secondaryTextMatchedSubstrings,
+      'secondary_text_matched_substrings': instance
+          .secondaryTextMatchedSubstrings
+          ?.map((e) => e.toJson())
+          .toList(),
     };

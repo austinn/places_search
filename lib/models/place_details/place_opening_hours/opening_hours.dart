@@ -6,13 +6,12 @@ part 'opening_hours.g.dart';
 
 @freezed
 class OpeningHours with _$OpeningHours {
-  @JsonSerializable(explicitToJson: true)
   const factory OpeningHours({
-    @JsonKey(name: 'open_now') bool? openNow,
+    bool? openNow,
     List<OpeningHoursPeriod>? periods,
-    @JsonKey(name: 'special_days') String? type,
+    String? type,
     List<String>? types,
-    @JsonKey(name: 'weekday_text') List<String>? weekdayText,
+    List<String>? weekdayText,
   }) = _OpeningHours;
 
   factory OpeningHours.fromJson(Map<String, dynamic> json) => _$OpeningHoursFromJson(json);

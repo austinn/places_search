@@ -5,7 +5,6 @@ part 'latlngliteral.g.dart';
 
 @freezed
 class LatLngLiteral with _$LatLngLiteral {
-  @JsonSerializable(explicitToJson: true)
   const factory LatLngLiteral({
     required double lat,
     required double lng,

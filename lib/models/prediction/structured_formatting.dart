@@ -9,10 +9,10 @@ part 'structured_formatting.g.dart';
 @freezed
 class StructuredFormatting with _$StructuredFormatting {
   factory StructuredFormatting({
-    @JsonKey(name: 'main_text') required String mainText,
-    @JsonKey(name: 'main_text_matched_substrings') required List<MatchedSubstring> mainTextMatchedSubstrings,
-    @JsonKey(name: 'secondary_text') String? secondaryText,
-    @JsonKey(name: 'secondary_text_matched_substrings') List<MatchedSubstring>? secondaryTextMatchedSubstrings,
+    required String mainText,
+    required List<MatchedSubstring> mainTextMatchedSubstrings,
+    String? secondaryText,
+    List<MatchedSubstring>? secondaryTextMatchedSubstrings,
   }) = _StructuredFormatting;
 
   factory StructuredFormatting.fromJson(Map<String, dynamic> json) => _$StructuredFormattingFromJson(json);

@@ -12,12 +12,12 @@ part 'prediction.g.dart';
 class Prediction with _$Prediction {
   factory Prediction({
     required String description,
-    @JsonKey(name: 'matched_substrings') required List<MatchedSubstring> matchedSubstrings,
-    @JsonKey(name: 'structured_formatting') required StructuredFormatting structuredFormatting,
+    required List<MatchedSubstring> matchedSubstrings,
+    required StructuredFormatting structuredFormatting,
     required List<Terms> terms,
     @Default([]) List<String> types,
-    @JsonKey(name: 'distance_meters') String? distanceMeters,
-    @JsonKey(name: 'place_id') String? placeId,
+    String? distanceMeters,
+    String? placeId,
 
     // Added after the fact to get latlng without asking for place details separately
 

@@ -20,18 +20,13 @@ Review _$ReviewFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Review {
-  @JsonKey(name: 'author_name')
   String get authorName => throw _privateConstructorUsedError;
   int get rating => throw _privateConstructorUsedError;
-  @JsonKey(name: 'relative_time_description')
   String get relativeTimeDescription => throw _privateConstructorUsedError;
   int get time => throw _privateConstructorUsedError;
-  @JsonKey(name: 'author_url')
   String? get authorUrl => throw _privateConstructorUsedError;
   String? get language => throw _privateConstructorUsedError;
-  @JsonKey(name: 'original_language')
   String? get originalLanguage => throw _privateConstructorUsedError;
-  @JsonKey(name: 'profile_photo_url')
   String? get profilePhotoUrl => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
   bool? get translated => throw _privateConstructorUsedError;
@@ -47,15 +42,14 @@ abstract class $ReviewCopyWith<$Res> {
       _$ReviewCopyWithImpl<$Res, Review>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'author_name') String authorName,
+      {String authorName,
       int rating,
-      @JsonKey(name: 'relative_time_description')
       String relativeTimeDescription,
       int time,
-      @JsonKey(name: 'author_url') String? authorUrl,
+      String? authorUrl,
       String? language,
-      @JsonKey(name: 'original_language') String? originalLanguage,
-      @JsonKey(name: 'profile_photo_url') String? profilePhotoUrl,
+      String? originalLanguage,
+      String? profilePhotoUrl,
       String? text,
       bool? translated});
 }
@@ -137,15 +131,14 @@ abstract class _$$ReviewImplCopyWith<$Res> implements $ReviewCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'author_name') String authorName,
+      {String authorName,
       int rating,
-      @JsonKey(name: 'relative_time_description')
       String relativeTimeDescription,
       int time,
-      @JsonKey(name: 'author_url') String? authorUrl,
+      String? authorUrl,
       String? language,
-      @JsonKey(name: 'original_language') String? originalLanguage,
-      @JsonKey(name: 'profile_photo_url') String? profilePhotoUrl,
+      String? originalLanguage,
+      String? profilePhotoUrl,
       String? text,
       bool? translated});
 }
@@ -218,19 +211,17 @@ class __$$ReviewImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$ReviewImpl implements _Review {
   const _$ReviewImpl(
-      {@JsonKey(name: 'author_name') required this.authorName,
+      {required this.authorName,
       required this.rating,
-      @JsonKey(name: 'relative_time_description')
       required this.relativeTimeDescription,
       required this.time,
-      @JsonKey(name: 'author_url') this.authorUrl,
+      this.authorUrl,
       this.language,
-      @JsonKey(name: 'original_language') this.originalLanguage,
-      @JsonKey(name: 'profile_photo_url') this.profilePhotoUrl,
+      this.originalLanguage,
+      this.profilePhotoUrl,
       this.text,
       this.translated});
 
@@ -238,25 +229,20 @@ class _$ReviewImpl implements _Review {
       _$$ReviewImplFromJson(json);
 
   @override
-  @JsonKey(name: 'author_name')
   final String authorName;
   @override
   final int rating;
   @override
-  @JsonKey(name: 'relative_time_description')
   final String relativeTimeDescription;
   @override
   final int time;
   @override
-  @JsonKey(name: 'author_url')
   final String? authorUrl;
   @override
   final String? language;
   @override
-  @JsonKey(name: 'original_language')
   final String? originalLanguage;
   @override
-  @JsonKey(name: 'profile_photo_url')
   final String? profilePhotoUrl;
   @override
   final String? text;
@@ -324,40 +310,34 @@ class _$ReviewImpl implements _Review {
 
 abstract class _Review implements Review {
   const factory _Review(
-      {@JsonKey(name: 'author_name') required final String authorName,
+      {required final String authorName,
       required final int rating,
-      @JsonKey(name: 'relative_time_description')
       required final String relativeTimeDescription,
       required final int time,
-      @JsonKey(name: 'author_url') final String? authorUrl,
+      final String? authorUrl,
       final String? language,
-      @JsonKey(name: 'original_language') final String? originalLanguage,
-      @JsonKey(name: 'profile_photo_url') final String? profilePhotoUrl,
+      final String? originalLanguage,
+      final String? profilePhotoUrl,
       final String? text,
       final bool? translated}) = _$ReviewImpl;
 
   factory _Review.fromJson(Map<String, dynamic> json) = _$ReviewImpl.fromJson;
 
   @override
-  @JsonKey(name: 'author_name')
   String get authorName;
   @override
   int get rating;
   @override
-  @JsonKey(name: 'relative_time_description')
   String get relativeTimeDescription;
   @override
   int get time;
   @override
-  @JsonKey(name: 'author_url')
   String? get authorUrl;
   @override
   String? get language;
   @override
-  @JsonKey(name: 'original_language')
   String? get originalLanguage;
   @override
-  @JsonKey(name: 'profile_photo_url')
   String? get profilePhotoUrl;
   @override
   String? get text;

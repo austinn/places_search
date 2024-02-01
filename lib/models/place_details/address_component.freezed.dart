@@ -20,14 +20,12 @@ AddressComponent _$AddressComponentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AddressComponent {
-  @JsonKey(name: 'long_name')
   String get longName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'short_name')
   String get shortName => throw _privateConstructorUsedError;
   List<String> get types => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+   ignore: true)
   $AddressComponentCopyWith<AddressComponent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -38,10 +36,7 @@ abstract class $AddressComponentCopyWith<$Res> {
           AddressComponent value, $Res Function(AddressComponent) then) =
       _$AddressComponentCopyWithImpl<$Res, AddressComponent>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'long_name') String longName,
-      @JsonKey(name: 'short_name') String shortName,
-      List<String> types});
+  $Res call({String longName, String shortName, List<String> types});
 }
 
 /// @nodoc
@@ -86,10 +81,7 @@ abstract class _$$AddressComponentImplCopyWith<$Res>
       __$$AddressComponentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'long_name') String longName,
-      @JsonKey(name: 'short_name') String shortName,
-      List<String> types});
+  $Res call({String longName, String shortName, List<String> types});
 }
 
 /// @nodoc
@@ -125,12 +117,11 @@ class __$$AddressComponentImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$AddressComponentImpl implements _AddressComponent {
   const _$AddressComponentImpl(
-      {@JsonKey(name: 'long_name') required this.longName,
-      @JsonKey(name: 'short_name') required this.shortName,
+      {required this.longName,
+      required this.shortName,
       required final List<String> types})
       : _types = types;
 
@@ -138,10 +129,8 @@ class _$AddressComponentImpl implements _AddressComponent {
       _$$AddressComponentImplFromJson(json);
 
   @override
-  @JsonKey(name: 'long_name')
   final String longName;
   @override
-  @JsonKey(name: 'short_name')
   final String shortName;
   final List<String> _types;
   @override
@@ -168,12 +157,12 @@ class _$AddressComponentImpl implements _AddressComponent {
             const DeepCollectionEquality().equals(other._types, _types));
   }
 
-  @JsonKey(ignore: true)
+   ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, longName, shortName,
       const DeepCollectionEquality().hash(_types));
 
-  @JsonKey(ignore: true)
+   ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AddressComponentImplCopyWith<_$AddressComponentImpl> get copyWith =>
@@ -190,23 +179,21 @@ class _$AddressComponentImpl implements _AddressComponent {
 
 abstract class _AddressComponent implements AddressComponent {
   const factory _AddressComponent(
-      {@JsonKey(name: 'long_name') required final String longName,
-      @JsonKey(name: 'short_name') required final String shortName,
+      {required final String longName,
+      required final String shortName,
       required final List<String> types}) = _$AddressComponentImpl;
 
   factory _AddressComponent.fromJson(Map<String, dynamic> json) =
       _$AddressComponentImpl.fromJson;
 
   @override
-  @JsonKey(name: 'long_name')
   String get longName;
   @override
-  @JsonKey(name: 'short_name')
   String get shortName;
   @override
   List<String> get types;
   @override
-  @JsonKey(ignore: true)
+   ignore: true)
   _$$AddressComponentImplCopyWith<_$AddressComponentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -20,41 +20,28 @@ Place _$PlaceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Place {
-  @JsonKey(name: 'address_components')
   List<AddressComponent>? get addressComponents =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'adr_address')
   String? get adrAddress => throw _privateConstructorUsedError;
-  @JsonKey(name: 'business_status')
   String? get businessStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'formatted_address')
   String? get formattedAddress => throw _privateConstructorUsedError;
-  @JsonKey(name: 'formatted_phone_number')
   String? get formattedPhoneNumber => throw _privateConstructorUsedError;
   Geometry? get geometry => throw _privateConstructorUsedError;
   String? get icon => throw _privateConstructorUsedError;
-  @JsonKey(name: 'icon_background_color')
   String? get iconBackgroundColor => throw _privateConstructorUsedError;
-  @JsonKey(name: 'icon_mask_base_uri')
   String? get iconMaskBaseUri => throw _privateConstructorUsedError;
-  @JsonKey(name: 'international_phone_number')
   String? get internationalPhoneNumber => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'opening_hours')
   OpeningHours? get openingHours => throw _privateConstructorUsedError;
   List<Photo>? get photos => throw _privateConstructorUsedError;
-  @JsonKey(name: 'place_id')
   String? get placeId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'plus_code')
   PlusCode? get plusCode => throw _privateConstructorUsedError;
   double? get rating => throw _privateConstructorUsedError;
   String? get reference => throw _privateConstructorUsedError;
   List<Review>? get reviews => throw _privateConstructorUsedError;
   List<String>? get types => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_ratings_total')
   int? get userRatingsTotal => throw _privateConstructorUsedError;
-  @JsonKey(name: 'utc_offset')
   int? get utcOffset => throw _privateConstructorUsedError;
   String? get vicinity => throw _privateConstructorUsedError;
   String? get website => throw _privateConstructorUsedError;
@@ -70,30 +57,28 @@ abstract class $PlaceCopyWith<$Res> {
       _$PlaceCopyWithImpl<$Res, Place>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'address_components')
-      List<AddressComponent>? addressComponents,
-      @JsonKey(name: 'adr_address') String? adrAddress,
-      @JsonKey(name: 'business_status') String? businessStatus,
-      @JsonKey(name: 'formatted_address') String? formattedAddress,
-      @JsonKey(name: 'formatted_phone_number') String? formattedPhoneNumber,
+      {List<AddressComponent>? addressComponents,
+      String? adrAddress,
+      String? businessStatus,
+      String? formattedAddress,
+      String? formattedPhoneNumber,
       Geometry? geometry,
       String? icon,
-      @JsonKey(name: 'icon_background_color') String? iconBackgroundColor,
-      @JsonKey(name: 'icon_mask_base_uri') String? iconMaskBaseUri,
-      @JsonKey(name: 'international_phone_number')
+      String? iconBackgroundColor,
+      String? iconMaskBaseUri,
       String? internationalPhoneNumber,
       String? name,
-      @JsonKey(name: 'opening_hours') OpeningHours? openingHours,
+      OpeningHours? openingHours,
       List<Photo>? photos,
-      @JsonKey(name: 'place_id') String? placeId,
-      @JsonKey(name: 'plus_code') PlusCode? plusCode,
+      String? placeId,
+      PlusCode? plusCode,
       double? rating,
       String? reference,
       List<Review>? reviews,
       List<String>? types,
       String? url,
-      @JsonKey(name: 'user_ratings_total') int? userRatingsTotal,
-      @JsonKey(name: 'utc_offset') int? utcOffset,
+      int? userRatingsTotal,
+      int? utcOffset,
       String? vicinity,
       String? website});
 
@@ -285,30 +270,28 @@ abstract class _$$PlaceImplCopyWith<$Res> implements $PlaceCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'address_components')
-      List<AddressComponent>? addressComponents,
-      @JsonKey(name: 'adr_address') String? adrAddress,
-      @JsonKey(name: 'business_status') String? businessStatus,
-      @JsonKey(name: 'formatted_address') String? formattedAddress,
-      @JsonKey(name: 'formatted_phone_number') String? formattedPhoneNumber,
+      {List<AddressComponent>? addressComponents,
+      String? adrAddress,
+      String? businessStatus,
+      String? formattedAddress,
+      String? formattedPhoneNumber,
       Geometry? geometry,
       String? icon,
-      @JsonKey(name: 'icon_background_color') String? iconBackgroundColor,
-      @JsonKey(name: 'icon_mask_base_uri') String? iconMaskBaseUri,
-      @JsonKey(name: 'international_phone_number')
+      String? iconBackgroundColor,
+      String? iconMaskBaseUri,
       String? internationalPhoneNumber,
       String? name,
-      @JsonKey(name: 'opening_hours') OpeningHours? openingHours,
+      OpeningHours? openingHours,
       List<Photo>? photos,
-      @JsonKey(name: 'place_id') String? placeId,
-      @JsonKey(name: 'plus_code') PlusCode? plusCode,
+      String? placeId,
+      PlusCode? plusCode,
       double? rating,
       String? reference,
       List<Review>? reviews,
       List<String>? types,
       String? url,
-      @JsonKey(name: 'user_ratings_total') int? userRatingsTotal,
-      @JsonKey(name: 'utc_offset') int? utcOffset,
+      int? userRatingsTotal,
+      int? utcOffset,
       String? vicinity,
       String? website});
 
@@ -461,30 +444,28 @@ class __$$PlaceImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PlaceImpl extends _Place {
   const _$PlaceImpl(
-      {@JsonKey(name: 'address_components')
-      final List<AddressComponent>? addressComponents,
-      @JsonKey(name: 'adr_address') this.adrAddress,
-      @JsonKey(name: 'business_status') this.businessStatus,
-      @JsonKey(name: 'formatted_address') this.formattedAddress,
-      @JsonKey(name: 'formatted_phone_number') this.formattedPhoneNumber,
+      {final List<AddressComponent>? addressComponents,
+      this.adrAddress,
+      this.businessStatus,
+      this.formattedAddress,
+      this.formattedPhoneNumber,
       this.geometry,
       this.icon,
-      @JsonKey(name: 'icon_background_color') this.iconBackgroundColor,
-      @JsonKey(name: 'icon_mask_base_uri') this.iconMaskBaseUri,
-      @JsonKey(name: 'international_phone_number')
+      this.iconBackgroundColor,
+      this.iconMaskBaseUri,
       this.internationalPhoneNumber,
       this.name,
-      @JsonKey(name: 'opening_hours') this.openingHours,
+      this.openingHours,
       final List<Photo>? photos,
-      @JsonKey(name: 'place_id') this.placeId,
-      @JsonKey(name: 'plus_code') this.plusCode,
+      this.placeId,
+      this.plusCode,
       this.rating,
       this.reference,
       final List<Review>? reviews,
       final List<String>? types,
       this.url,
-      @JsonKey(name: 'user_ratings_total') this.userRatingsTotal,
-      @JsonKey(name: 'utc_offset') this.utcOffset,
+      this.userRatingsTotal,
+      this.utcOffset,
       this.vicinity,
       this.website})
       : _addressComponents = addressComponents,
@@ -498,7 +479,6 @@ class _$PlaceImpl extends _Place {
 
   final List<AddressComponent>? _addressComponents;
   @override
-  @JsonKey(name: 'address_components')
   List<AddressComponent>? get addressComponents {
     final value = _addressComponents;
     if (value == null) return null;
@@ -509,34 +489,26 @@ class _$PlaceImpl extends _Place {
   }
 
   @override
-  @JsonKey(name: 'adr_address')
   final String? adrAddress;
   @override
-  @JsonKey(name: 'business_status')
   final String? businessStatus;
   @override
-  @JsonKey(name: 'formatted_address')
   final String? formattedAddress;
   @override
-  @JsonKey(name: 'formatted_phone_number')
   final String? formattedPhoneNumber;
   @override
   final Geometry? geometry;
   @override
   final String? icon;
   @override
-  @JsonKey(name: 'icon_background_color')
   final String? iconBackgroundColor;
   @override
-  @JsonKey(name: 'icon_mask_base_uri')
   final String? iconMaskBaseUri;
   @override
-  @JsonKey(name: 'international_phone_number')
   final String? internationalPhoneNumber;
   @override
   final String? name;
   @override
-  @JsonKey(name: 'opening_hours')
   final OpeningHours? openingHours;
   final List<Photo>? _photos;
   @override
@@ -549,10 +521,8 @@ class _$PlaceImpl extends _Place {
   }
 
   @override
-  @JsonKey(name: 'place_id')
   final String? placeId;
   @override
-  @JsonKey(name: 'plus_code')
   final PlusCode? plusCode;
   @override
   final double? rating;
@@ -581,10 +551,8 @@ class _$PlaceImpl extends _Place {
   @override
   final String? url;
   @override
-  @JsonKey(name: 'user_ratings_total')
   final int? userRatingsTotal;
   @override
-  @JsonKey(name: 'utc_offset')
   final int? utcOffset;
   @override
   final String? vicinity;
@@ -689,31 +657,28 @@ class _$PlaceImpl extends _Place {
 
 abstract class _Place extends Place {
   const factory _Place(
-      {@JsonKey(name: 'address_components')
-      final List<AddressComponent>? addressComponents,
-      @JsonKey(name: 'adr_address') final String? adrAddress,
-      @JsonKey(name: 'business_status') final String? businessStatus,
-      @JsonKey(name: 'formatted_address') final String? formattedAddress,
-      @JsonKey(name: 'formatted_phone_number')
+      {final List<AddressComponent>? addressComponents,
+      final String? adrAddress,
+      final String? businessStatus,
+      final String? formattedAddress,
       final String? formattedPhoneNumber,
       final Geometry? geometry,
       final String? icon,
-      @JsonKey(name: 'icon_background_color') final String? iconBackgroundColor,
-      @JsonKey(name: 'icon_mask_base_uri') final String? iconMaskBaseUri,
-      @JsonKey(name: 'international_phone_number')
+      final String? iconBackgroundColor,
+      final String? iconMaskBaseUri,
       final String? internationalPhoneNumber,
       final String? name,
-      @JsonKey(name: 'opening_hours') final OpeningHours? openingHours,
+      final OpeningHours? openingHours,
       final List<Photo>? photos,
-      @JsonKey(name: 'place_id') final String? placeId,
-      @JsonKey(name: 'plus_code') final PlusCode? plusCode,
+      final String? placeId,
+      final PlusCode? plusCode,
       final double? rating,
       final String? reference,
       final List<Review>? reviews,
       final List<String>? types,
       final String? url,
-      @JsonKey(name: 'user_ratings_total') final int? userRatingsTotal,
-      @JsonKey(name: 'utc_offset') final int? utcOffset,
+      final int? userRatingsTotal,
+      final int? utcOffset,
       final String? vicinity,
       final String? website}) = _$PlaceImpl;
   const _Place._() : super._();
@@ -721,45 +686,34 @@ abstract class _Place extends Place {
   factory _Place.fromJson(Map<String, dynamic> json) = _$PlaceImpl.fromJson;
 
   @override
-  @JsonKey(name: 'address_components')
   List<AddressComponent>? get addressComponents;
   @override
-  @JsonKey(name: 'adr_address')
   String? get adrAddress;
   @override
-  @JsonKey(name: 'business_status')
   String? get businessStatus;
   @override
-  @JsonKey(name: 'formatted_address')
   String? get formattedAddress;
   @override
-  @JsonKey(name: 'formatted_phone_number')
   String? get formattedPhoneNumber;
   @override
   Geometry? get geometry;
   @override
   String? get icon;
   @override
-  @JsonKey(name: 'icon_background_color')
   String? get iconBackgroundColor;
   @override
-  @JsonKey(name: 'icon_mask_base_uri')
   String? get iconMaskBaseUri;
   @override
-  @JsonKey(name: 'international_phone_number')
   String? get internationalPhoneNumber;
   @override
   String? get name;
   @override
-  @JsonKey(name: 'opening_hours')
   OpeningHours? get openingHours;
   @override
   List<Photo>? get photos;
   @override
-  @JsonKey(name: 'place_id')
   String? get placeId;
   @override
-  @JsonKey(name: 'plus_code')
   PlusCode? get plusCode;
   @override
   double? get rating;
@@ -772,10 +726,8 @@ abstract class _Place extends Place {
   @override
   String? get url;
   @override
-  @JsonKey(name: 'user_ratings_total')
   int? get userRatingsTotal;
   @override
-  @JsonKey(name: 'utc_offset')
   int? get utcOffset;
   @override
   String? get vicinity;

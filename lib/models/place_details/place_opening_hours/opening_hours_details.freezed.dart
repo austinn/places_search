@@ -26,7 +26,7 @@ mixin _$OpeningHoursDetails {
   bool? get truncated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+   ignore: true)
   $OpeningHoursDetailsCopyWith<OpeningHoursDetails> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -128,8 +128,7 @@ class __$$OpeningHoursDetailsImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$OpeningHoursDetailsImpl implements _OpeningHoursDetails {
   const _$OpeningHoursDetailsImpl(
       {required this.day, required this.time, this.date, this.truncated});
@@ -163,11 +162,11 @@ class _$OpeningHoursDetailsImpl implements _OpeningHoursDetails {
                 other.truncated == truncated));
   }
 
-  @JsonKey(ignore: true)
+   ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, day, time, date, truncated);
 
-  @JsonKey(ignore: true)
+   ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$OpeningHoursDetailsImplCopyWith<_$OpeningHoursDetailsImpl> get copyWith =>
@@ -201,7 +200,7 @@ abstract class _OpeningHoursDetails implements OpeningHoursDetails {
   @override
   bool? get truncated;
   @override
-  @JsonKey(ignore: true)
+   ignore: true)
   _$$OpeningHoursDetailsImplCopyWith<_$OpeningHoursDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -29,9 +29,10 @@ _$PredictionImpl _$$PredictionImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$PredictionImplToJson(_$PredictionImpl instance) =>
     <String, dynamic>{
       'description': instance.description,
-      'matched_substrings': instance.matchedSubstrings,
-      'structured_formatting': instance.structuredFormatting,
-      'terms': instance.terms,
+      'matched_substrings':
+          instance.matchedSubstrings.map((e) => e.toJson()).toList(),
+      'structured_formatting': instance.structuredFormatting.toJson(),
+      'terms': instance.terms.map((e) => e.toJson()).toList(),
       'types': instance.types,
       'distance_meters': instance.distanceMeters,
       'place_id': instance.placeId,

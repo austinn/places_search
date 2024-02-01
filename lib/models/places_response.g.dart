@@ -18,6 +18,6 @@ _$PlacesResponseImpl _$$PlacesResponseImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$PlacesResponseImplToJson(
         _$PlacesResponseImpl instance) =>
     <String, dynamic>{
-      'predictions': instance.predictions,
+      'predictions': instance.predictions.map((e) => e.toJson()).toList(),
       'status': instance.status,
     };

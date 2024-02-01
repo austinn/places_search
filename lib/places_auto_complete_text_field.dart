@@ -106,7 +106,9 @@ class PlaceAutoCompleteTextFieldState extends State<PlaceAutoCompleteTextField> 
 
     _overlayEntry = null;
     _overlayEntry = _createOverlayEntry();
-    Overlay.of(context).insert(_overlayEntry!);
+    if (context.mounted) {
+      Overlay.of(context).insert(_overlayEntry!);
+    }
     setState(() {
       isLoading = false;
     });

@@ -5,11 +5,10 @@ part 'photos.g.dart';
 
 @freezed
 class Photo with _$Photo {
-  @JsonSerializable(explicitToJson: true)
   const factory Photo({
     required num height,
-    @JsonKey(name: 'html_attributions') required List<String> htmlAttributions,
-    @JsonKey(name: 'photo_reference') required String photoReference,
+    required List<String> htmlAttributions,
+    required String photoReference,
     required num width,
   }) = _Photo;
 

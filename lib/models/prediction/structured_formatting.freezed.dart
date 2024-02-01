@@ -20,14 +20,10 @@ StructuredFormatting _$StructuredFormattingFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$StructuredFormatting {
-  @JsonKey(name: 'main_text')
   String get mainText => throw _privateConstructorUsedError;
-  @JsonKey(name: 'main_text_matched_substrings')
   List<MatchedSubstring> get mainTextMatchedSubstrings =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'secondary_text')
   String? get secondaryText => throw _privateConstructorUsedError;
-  @JsonKey(name: 'secondary_text_matched_substrings')
   List<MatchedSubstring>? get secondaryTextMatchedSubstrings =>
       throw _privateConstructorUsedError;
 
@@ -44,11 +40,9 @@ abstract class $StructuredFormattingCopyWith<$Res> {
       _$StructuredFormattingCopyWithImpl<$Res, StructuredFormatting>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'main_text') String mainText,
-      @JsonKey(name: 'main_text_matched_substrings')
+      {String mainText,
       List<MatchedSubstring> mainTextMatchedSubstrings,
-      @JsonKey(name: 'secondary_text') String? secondaryText,
-      @JsonKey(name: 'secondary_text_matched_substrings')
+      String? secondaryText,
       List<MatchedSubstring>? secondaryTextMatchedSubstrings});
 }
 
@@ -101,11 +95,9 @@ abstract class _$$StructuredFormattingImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'main_text') String mainText,
-      @JsonKey(name: 'main_text_matched_substrings')
+      {String mainText,
       List<MatchedSubstring> mainTextMatchedSubstrings,
-      @JsonKey(name: 'secondary_text') String? secondaryText,
-      @JsonKey(name: 'secondary_text_matched_substrings')
+      String? secondaryText,
       List<MatchedSubstring>? secondaryTextMatchedSubstrings});
 }
 
@@ -150,11 +142,9 @@ class __$$StructuredFormattingImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$StructuredFormattingImpl implements _StructuredFormatting {
   _$StructuredFormattingImpl(
-      {@JsonKey(name: 'main_text') required this.mainText,
-      @JsonKey(name: 'main_text_matched_substrings')
+      {required this.mainText,
       required final List<MatchedSubstring> mainTextMatchedSubstrings,
-      @JsonKey(name: 'secondary_text') this.secondaryText,
-      @JsonKey(name: 'secondary_text_matched_substrings')
+      this.secondaryText,
       final List<MatchedSubstring>? secondaryTextMatchedSubstrings})
       : _mainTextMatchedSubstrings = mainTextMatchedSubstrings,
         _secondaryTextMatchedSubstrings = secondaryTextMatchedSubstrings;
@@ -163,11 +153,9 @@ class _$StructuredFormattingImpl implements _StructuredFormatting {
       _$$StructuredFormattingImplFromJson(json);
 
   @override
-  @JsonKey(name: 'main_text')
   final String mainText;
   final List<MatchedSubstring> _mainTextMatchedSubstrings;
   @override
-  @JsonKey(name: 'main_text_matched_substrings')
   List<MatchedSubstring> get mainTextMatchedSubstrings {
     if (_mainTextMatchedSubstrings is EqualUnmodifiableListView)
       return _mainTextMatchedSubstrings;
@@ -176,11 +164,9 @@ class _$StructuredFormattingImpl implements _StructuredFormatting {
   }
 
   @override
-  @JsonKey(name: 'secondary_text')
   final String? secondaryText;
   final List<MatchedSubstring>? _secondaryTextMatchedSubstrings;
   @override
-  @JsonKey(name: 'secondary_text_matched_substrings')
   List<MatchedSubstring>? get secondaryTextMatchedSubstrings {
     final value = _secondaryTextMatchedSubstrings;
     if (value == null) return null;
@@ -238,11 +224,9 @@ class _$StructuredFormattingImpl implements _StructuredFormatting {
 
 abstract class _StructuredFormatting implements StructuredFormatting {
   factory _StructuredFormatting(
-          {@JsonKey(name: 'main_text') required final String mainText,
-          @JsonKey(name: 'main_text_matched_substrings')
+          {required final String mainText,
           required final List<MatchedSubstring> mainTextMatchedSubstrings,
-          @JsonKey(name: 'secondary_text') final String? secondaryText,
-          @JsonKey(name: 'secondary_text_matched_substrings')
+          final String? secondaryText,
           final List<MatchedSubstring>? secondaryTextMatchedSubstrings}) =
       _$StructuredFormattingImpl;
 
@@ -250,16 +234,12 @@ abstract class _StructuredFormatting implements StructuredFormatting {
       _$StructuredFormattingImpl.fromJson;
 
   @override
-  @JsonKey(name: 'main_text')
   String get mainText;
   @override
-  @JsonKey(name: 'main_text_matched_substrings')
   List<MatchedSubstring> get mainTextMatchedSubstrings;
   @override
-  @JsonKey(name: 'secondary_text')
   String? get secondaryText;
   @override
-  @JsonKey(name: 'secondary_text_matched_substrings')
   List<MatchedSubstring>? get secondaryTextMatchedSubstrings;
   @override
   @JsonKey(ignore: true)

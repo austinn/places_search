@@ -24,7 +24,7 @@ mixin _$OpeningHoursPeriod {
   OpeningHoursDetails? get close => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+   ignore: true)
   $OpeningHoursPeriodCopyWith<OpeningHoursPeriod> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -134,8 +134,7 @@ class __$$OpeningHoursPeriodImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$OpeningHoursPeriodImpl implements _OpeningHoursPeriod {
   const _$OpeningHoursPeriodImpl({required this.open, this.close});
 
@@ -161,11 +160,11 @@ class _$OpeningHoursPeriodImpl implements _OpeningHoursPeriod {
             (identical(other.close, close) || other.close == close));
   }
 
-  @JsonKey(ignore: true)
+   ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, open, close);
 
-  @JsonKey(ignore: true)
+   ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$OpeningHoursPeriodImplCopyWith<_$OpeningHoursPeriodImpl> get copyWith =>
@@ -193,7 +192,7 @@ abstract class _OpeningHoursPeriod implements OpeningHoursPeriod {
   @override
   OpeningHoursDetails? get close;
   @override
-  @JsonKey(ignore: true)
+   ignore: true)
   _$$OpeningHoursPeriodImplCopyWith<_$OpeningHoursPeriodImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

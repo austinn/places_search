@@ -21,11 +21,9 @@ PlaceDetails _$PlaceDetailsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PlaceDetails {
 //
-  @JsonKey(name: 'html_attributions')
   List<String> get htmlAttributions => throw _privateConstructorUsedError;
   Place get result => throw _privateConstructorUsedError;
   PlaceDetailsStatus get status => throw _privateConstructorUsedError;
-  @JsonKey(name: 'info_messages')
   List<String> get infoMessages => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,10 +39,10 @@ abstract class $PlaceDetailsCopyWith<$Res> {
       _$PlaceDetailsCopyWithImpl<$Res, PlaceDetails>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'html_attributions') List<String> htmlAttributions,
+      {List<String> htmlAttributions,
       Place result,
       PlaceDetailsStatus status,
-      @JsonKey(name: 'info_messages') List<String> infoMessages});
+      List<String> infoMessages});
 
   $PlaceCopyWith<$Res> get result;
 }
@@ -105,10 +103,10 @@ abstract class _$$PlaceDetailsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'html_attributions') List<String> htmlAttributions,
+      {List<String> htmlAttributions,
       Place result,
       PlaceDetailsStatus status,
-      @JsonKey(name: 'info_messages') List<String> infoMessages});
+      List<String> infoMessages});
 
   @override
   $PlaceCopyWith<$Res> get result;
@@ -152,15 +150,12 @@ class __$$PlaceDetailsImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$PlaceDetailsImpl implements _PlaceDetails {
   const _$PlaceDetailsImpl(
-      {@JsonKey(name: 'html_attributions')
-      required final List<String> htmlAttributions,
+      {required final List<String> htmlAttributions,
       required this.result,
       required this.status,
-      @JsonKey(name: 'info_messages')
       final List<String> infoMessages = const []})
       : _htmlAttributions = htmlAttributions,
         _infoMessages = infoMessages;
@@ -172,7 +167,6 @@ class _$PlaceDetailsImpl implements _PlaceDetails {
   final List<String> _htmlAttributions;
 //
   @override
-  @JsonKey(name: 'html_attributions')
   List<String> get htmlAttributions {
     if (_htmlAttributions is EqualUnmodifiableListView)
       return _htmlAttributions;
@@ -186,7 +180,7 @@ class _$PlaceDetailsImpl implements _PlaceDetails {
   final PlaceDetailsStatus status;
   final List<String> _infoMessages;
   @override
-  @JsonKey(name: 'info_messages')
+  @JsonKey()
   List<String> get infoMessages {
     if (_infoMessages is EqualUnmodifiableListView) return _infoMessages;
     // ignore: implicit_dynamic_type
@@ -236,25 +230,21 @@ class _$PlaceDetailsImpl implements _PlaceDetails {
 
 abstract class _PlaceDetails implements PlaceDetails {
   const factory _PlaceDetails(
-          {@JsonKey(name: 'html_attributions')
-          required final List<String> htmlAttributions,
-          required final Place result,
-          required final PlaceDetailsStatus status,
-          @JsonKey(name: 'info_messages') final List<String> infoMessages}) =
-      _$PlaceDetailsImpl;
+      {required final List<String> htmlAttributions,
+      required final Place result,
+      required final PlaceDetailsStatus status,
+      final List<String> infoMessages}) = _$PlaceDetailsImpl;
 
   factory _PlaceDetails.fromJson(Map<String, dynamic> json) =
       _$PlaceDetailsImpl.fromJson;
 
   @override //
-  @JsonKey(name: 'html_attributions')
   List<String> get htmlAttributions;
   @override
   Place get result;
   @override
   PlaceDetailsStatus get status;
   @override
-  @JsonKey(name: 'info_messages')
   List<String> get infoMessages;
   @override
   @JsonKey(ignore: true)

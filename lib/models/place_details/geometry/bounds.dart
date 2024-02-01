@@ -6,7 +6,6 @@ part 'bounds.g.dart';
 
 @freezed
 class Bounds with _$Bounds {
-  @JsonSerializable(explicitToJson: true)
   const factory Bounds({
     required LatLngLiteral northeast,
     required LatLngLiteral southwest,

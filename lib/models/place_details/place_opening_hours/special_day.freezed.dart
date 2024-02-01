@@ -21,7 +21,6 @@ SpecialDay _$SpecialDayFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SpecialDay {
   String? get date => throw _privateConstructorUsedError;
-  @JsonKey(name: 'exceptional_hours')
   bool? get exceptionalHours => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,9 +35,7 @@ abstract class $SpecialDayCopyWith<$Res> {
           SpecialDay value, $Res Function(SpecialDay) then) =
       _$SpecialDayCopyWithImpl<$Res, SpecialDay>;
   @useResult
-  $Res call(
-      {String? date,
-      @JsonKey(name: 'exceptional_hours') bool? exceptionalHours});
+  $Res call({String? date, bool? exceptionalHours});
 }
 
 /// @nodoc
@@ -78,9 +75,7 @@ abstract class _$$SpecialDayImplCopyWith<$Res>
       __$$SpecialDayImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? date,
-      @JsonKey(name: 'exceptional_hours') bool? exceptionalHours});
+  $Res call({String? date, bool? exceptionalHours});
 }
 
 /// @nodoc
@@ -111,12 +106,9 @@ class __$$SpecialDayImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$SpecialDayImpl implements _SpecialDay {
-  const _$SpecialDayImpl(
-      {this.date,
-      @JsonKey(name: 'exceptional_hours') required this.exceptionalHours});
+  const _$SpecialDayImpl({this.date, required this.exceptionalHours});
 
   factory _$SpecialDayImpl.fromJson(Map<String, dynamic> json) =>
       _$$SpecialDayImplFromJson(json);
@@ -124,7 +116,6 @@ class _$SpecialDayImpl implements _SpecialDay {
   @override
   final String? date;
   @override
-  @JsonKey(name: 'exceptional_hours')
   final bool? exceptionalHours;
 
   @override
@@ -163,7 +154,6 @@ class _$SpecialDayImpl implements _SpecialDay {
 abstract class _SpecialDay implements SpecialDay {
   const factory _SpecialDay(
       {final String? date,
-      @JsonKey(name: 'exceptional_hours')
       required final bool? exceptionalHours}) = _$SpecialDayImpl;
 
   factory _SpecialDay.fromJson(Map<String, dynamic> json) =
@@ -172,7 +162,6 @@ abstract class _SpecialDay implements SpecialDay {
   @override
   String? get date;
   @override
-  @JsonKey(name: 'exceptional_hours')
   bool? get exceptionalHours;
   @override
   @JsonKey(ignore: true)

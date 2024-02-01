@@ -21,17 +21,13 @@ Prediction _$PredictionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Prediction {
   String get description => throw _privateConstructorUsedError;
-  @JsonKey(name: 'matched_substrings')
   List<MatchedSubstring> get matchedSubstrings =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'structured_formatting')
   StructuredFormatting get structuredFormatting =>
       throw _privateConstructorUsedError;
   List<Terms> get terms => throw _privateConstructorUsedError;
   List<String> get types => throw _privateConstructorUsedError;
-  @JsonKey(name: 'distance_meters')
   String? get distanceMeters => throw _privateConstructorUsedError;
-  @JsonKey(name: 'place_id')
   String? get placeId =>
       throw _privateConstructorUsedError; // Added after the fact to get latlng without asking for place details separately
   String? get lat => throw _privateConstructorUsedError;
@@ -51,14 +47,12 @@ abstract class $PredictionCopyWith<$Res> {
   @useResult
   $Res call(
       {String description,
-      @JsonKey(name: 'matched_substrings')
       List<MatchedSubstring> matchedSubstrings,
-      @JsonKey(name: 'structured_formatting')
       StructuredFormatting structuredFormatting,
       List<Terms> terms,
       List<String> types,
-      @JsonKey(name: 'distance_meters') String? distanceMeters,
-      @JsonKey(name: 'place_id') String? placeId,
+      String? distanceMeters,
+      String? placeId,
       String? lat,
       String? lng});
 
@@ -148,14 +142,12 @@ abstract class _$$PredictionImplCopyWith<$Res>
   @useResult
   $Res call(
       {String description,
-      @JsonKey(name: 'matched_substrings')
       List<MatchedSubstring> matchedSubstrings,
-      @JsonKey(name: 'structured_formatting')
       StructuredFormatting structuredFormatting,
       List<Terms> terms,
       List<String> types,
-      @JsonKey(name: 'distance_meters') String? distanceMeters,
-      @JsonKey(name: 'place_id') String? placeId,
+      String? distanceMeters,
+      String? placeId,
       String? lat,
       String? lng});
 
@@ -230,14 +222,12 @@ class __$$PredictionImplCopyWithImpl<$Res>
 class _$PredictionImpl implements _Prediction {
   _$PredictionImpl(
       {required this.description,
-      @JsonKey(name: 'matched_substrings')
       required final List<MatchedSubstring> matchedSubstrings,
-      @JsonKey(name: 'structured_formatting')
       required this.structuredFormatting,
       required final List<Terms> terms,
       final List<String> types = const [],
-      @JsonKey(name: 'distance_meters') this.distanceMeters,
-      @JsonKey(name: 'place_id') this.placeId,
+      this.distanceMeters,
+      this.placeId,
       this.lat,
       this.lng})
       : _matchedSubstrings = matchedSubstrings,
@@ -251,7 +241,6 @@ class _$PredictionImpl implements _Prediction {
   final String description;
   final List<MatchedSubstring> _matchedSubstrings;
   @override
-  @JsonKey(name: 'matched_substrings')
   List<MatchedSubstring> get matchedSubstrings {
     if (_matchedSubstrings is EqualUnmodifiableListView)
       return _matchedSubstrings;
@@ -260,7 +249,6 @@ class _$PredictionImpl implements _Prediction {
   }
 
   @override
-  @JsonKey(name: 'structured_formatting')
   final StructuredFormatting structuredFormatting;
   final List<Terms> _terms;
   @override
@@ -280,10 +268,8 @@ class _$PredictionImpl implements _Prediction {
   }
 
   @override
-  @JsonKey(name: 'distance_meters')
   final String? distanceMeters;
   @override
-  @JsonKey(name: 'place_id')
   final String? placeId;
 // Added after the fact to get latlng without asking for place details separately
   @override
@@ -347,14 +333,12 @@ class _$PredictionImpl implements _Prediction {
 abstract class _Prediction implements Prediction {
   factory _Prediction(
       {required final String description,
-      @JsonKey(name: 'matched_substrings')
       required final List<MatchedSubstring> matchedSubstrings,
-      @JsonKey(name: 'structured_formatting')
       required final StructuredFormatting structuredFormatting,
       required final List<Terms> terms,
       final List<String> types,
-      @JsonKey(name: 'distance_meters') final String? distanceMeters,
-      @JsonKey(name: 'place_id') final String? placeId,
+      final String? distanceMeters,
+      final String? placeId,
       final String? lat,
       final String? lng}) = _$PredictionImpl;
 
@@ -364,20 +348,16 @@ abstract class _Prediction implements Prediction {
   @override
   String get description;
   @override
-  @JsonKey(name: 'matched_substrings')
   List<MatchedSubstring> get matchedSubstrings;
   @override
-  @JsonKey(name: 'structured_formatting')
   StructuredFormatting get structuredFormatting;
   @override
   List<Terms> get terms;
   @override
   List<String> get types;
   @override
-  @JsonKey(name: 'distance_meters')
   String? get distanceMeters;
   @override
-  @JsonKey(name: 'place_id')
   String? get placeId;
   @override // Added after the fact to get latlng without asking for place details separately
   String? get lat;

@@ -20,9 +20,7 @@ PlusCode _$PlusCodeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PlusCode {
-  @JsonKey(name: 'global_code')
   String get globalCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'compound_code')
   String? get compoundCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,9 +34,7 @@ abstract class $PlusCodeCopyWith<$Res> {
   factory $PlusCodeCopyWith(PlusCode value, $Res Function(PlusCode) then) =
       _$PlusCodeCopyWithImpl<$Res, PlusCode>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'global_code') String globalCode,
-      @JsonKey(name: 'compound_code') String? compoundCode});
+  $Res call({String globalCode, String? compoundCode});
 }
 
 /// @nodoc
@@ -78,9 +74,7 @@ abstract class _$$PlusCodeImplCopyWith<$Res>
       __$$PlusCodeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'global_code') String globalCode,
-      @JsonKey(name: 'compound_code') String? compoundCode});
+  $Res call({String globalCode, String? compoundCode});
 }
 
 /// @nodoc
@@ -111,21 +105,16 @@ class __$$PlusCodeImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$PlusCodeImpl implements _PlusCode {
-  const _$PlusCodeImpl(
-      {@JsonKey(name: 'global_code') required this.globalCode,
-      @JsonKey(name: 'compound_code') this.compoundCode});
+  const _$PlusCodeImpl({required this.globalCode, this.compoundCode});
 
   factory _$PlusCodeImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlusCodeImplFromJson(json);
 
   @override
-  @JsonKey(name: 'global_code')
   final String globalCode;
   @override
-  @JsonKey(name: 'compound_code')
   final String? compoundCode;
 
   @override
@@ -164,18 +153,15 @@ class _$PlusCodeImpl implements _PlusCode {
 
 abstract class _PlusCode implements PlusCode {
   const factory _PlusCode(
-          {@JsonKey(name: 'global_code') required final String globalCode,
-          @JsonKey(name: 'compound_code') final String? compoundCode}) =
-      _$PlusCodeImpl;
+      {required final String globalCode,
+      final String? compoundCode}) = _$PlusCodeImpl;
 
   factory _PlusCode.fromJson(Map<String, dynamic> json) =
       _$PlusCodeImpl.fromJson;
 
   @override
-  @JsonKey(name: 'global_code')
   String get globalCode;
   @override
-  @JsonKey(name: 'compound_code')
   String? get compoundCode;
   @override
   @JsonKey(ignore: true)

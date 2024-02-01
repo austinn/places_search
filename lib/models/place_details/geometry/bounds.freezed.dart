@@ -24,7 +24,7 @@ mixin _$Bounds {
   LatLngLiteral get southwest => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+   ignore: true)
   $BoundsCopyWith<Bounds> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -127,8 +127,7 @@ class __$$BoundsImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$BoundsImpl implements _Bounds {
   const _$BoundsImpl({required this.northeast, required this.southwest});
 
@@ -156,11 +155,11 @@ class _$BoundsImpl implements _Bounds {
                 other.southwest == southwest));
   }
 
-  @JsonKey(ignore: true)
+   ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, northeast, southwest);
 
-  @JsonKey(ignore: true)
+   ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$BoundsImplCopyWith<_$BoundsImpl> get copyWith =>
@@ -186,7 +185,7 @@ abstract class _Bounds implements Bounds {
   @override
   LatLngLiteral get southwest;
   @override
-  @JsonKey(ignore: true)
+   ignore: true)
   _$$BoundsImplCopyWith<_$BoundsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

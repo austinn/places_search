@@ -7,7 +7,6 @@ part 'geometry.g.dart';
 
 @freezed
 class Geometry with _$Geometry {
-  @JsonSerializable(explicitToJson: true)
   const factory Geometry({
     required LatLngLiteral location,
     required Bounds viewport,

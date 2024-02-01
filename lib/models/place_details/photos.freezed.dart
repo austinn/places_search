@@ -21,9 +21,7 @@ Photo _$PhotoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Photo {
   num get height => throw _privateConstructorUsedError;
-  @JsonKey(name: 'html_attributions')
   List<String> get htmlAttributions => throw _privateConstructorUsedError;
-  @JsonKey(name: 'photo_reference')
   String get photoReference => throw _privateConstructorUsedError;
   num get width => throw _privateConstructorUsedError;
 
@@ -39,8 +37,8 @@ abstract class $PhotoCopyWith<$Res> {
   @useResult
   $Res call(
       {num height,
-      @JsonKey(name: 'html_attributions') List<String> htmlAttributions,
-      @JsonKey(name: 'photo_reference') String photoReference,
+      List<String> htmlAttributions,
+      String photoReference,
       num width});
 }
 
@@ -92,8 +90,8 @@ abstract class _$$PhotoImplCopyWith<$Res> implements $PhotoCopyWith<$Res> {
   @useResult
   $Res call(
       {num height,
-      @JsonKey(name: 'html_attributions') List<String> htmlAttributions,
-      @JsonKey(name: 'photo_reference') String photoReference,
+      List<String> htmlAttributions,
+      String photoReference,
       num width});
 }
 
@@ -135,14 +133,12 @@ class __$$PhotoImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$PhotoImpl implements _Photo {
   const _$PhotoImpl(
       {required this.height,
-      @JsonKey(name: 'html_attributions')
       required final List<String> htmlAttributions,
-      @JsonKey(name: 'photo_reference') required this.photoReference,
+      required this.photoReference,
       required this.width})
       : _htmlAttributions = htmlAttributions;
 
@@ -153,7 +149,6 @@ class _$PhotoImpl implements _Photo {
   final num height;
   final List<String> _htmlAttributions;
   @override
-  @JsonKey(name: 'html_attributions')
   List<String> get htmlAttributions {
     if (_htmlAttributions is EqualUnmodifiableListView)
       return _htmlAttributions;
@@ -162,7 +157,6 @@ class _$PhotoImpl implements _Photo {
   }
 
   @override
-  @JsonKey(name: 'photo_reference')
   final String photoReference;
   @override
   final num width;
@@ -211,9 +205,8 @@ class _$PhotoImpl implements _Photo {
 abstract class _Photo implements Photo {
   const factory _Photo(
       {required final num height,
-      @JsonKey(name: 'html_attributions')
       required final List<String> htmlAttributions,
-      @JsonKey(name: 'photo_reference') required final String photoReference,
+      required final String photoReference,
       required final num width}) = _$PhotoImpl;
 
   factory _Photo.fromJson(Map<String, dynamic> json) = _$PhotoImpl.fromJson;
@@ -221,10 +214,8 @@ abstract class _Photo implements Photo {
   @override
   num get height;
   @override
-  @JsonKey(name: 'html_attributions')
   List<String> get htmlAttributions;
   @override
-  @JsonKey(name: 'photo_reference')
   String get photoReference;
   @override
   num get width;

@@ -20,13 +20,10 @@ OpeningHours _$OpeningHoursFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$OpeningHours {
-  @JsonKey(name: 'open_now')
   bool? get openNow => throw _privateConstructorUsedError;
   List<OpeningHoursPeriod>? get periods => throw _privateConstructorUsedError;
-  @JsonKey(name: 'special_days')
   String? get type => throw _privateConstructorUsedError;
   List<String>? get types => throw _privateConstructorUsedError;
-  @JsonKey(name: 'weekday_text')
   List<String>? get weekdayText => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,11 +39,11 @@ abstract class $OpeningHoursCopyWith<$Res> {
       _$OpeningHoursCopyWithImpl<$Res, OpeningHours>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'open_now') bool? openNow,
+      {bool? openNow,
       List<OpeningHoursPeriod>? periods,
-      @JsonKey(name: 'special_days') String? type,
+      String? type,
       List<String>? types,
-      @JsonKey(name: 'weekday_text') List<String>? weekdayText});
+      List<String>? weekdayText});
 }
 
 /// @nodoc
@@ -102,11 +99,11 @@ abstract class _$$OpeningHoursImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'open_now') bool? openNow,
+      {bool? openNow,
       List<OpeningHoursPeriod>? periods,
-      @JsonKey(name: 'special_days') String? type,
+      String? type,
       List<String>? types,
-      @JsonKey(name: 'weekday_text') List<String>? weekdayText});
+      List<String>? weekdayText});
 }
 
 /// @nodoc
@@ -152,15 +149,14 @@ class __$$OpeningHoursImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$OpeningHoursImpl implements _OpeningHours {
   const _$OpeningHoursImpl(
-      {@JsonKey(name: 'open_now') this.openNow,
+      {this.openNow,
       final List<OpeningHoursPeriod>? periods,
-      @JsonKey(name: 'special_days') this.type,
+      this.type,
       final List<String>? types,
-      @JsonKey(name: 'weekday_text') final List<String>? weekdayText})
+      final List<String>? weekdayText})
       : _periods = periods,
         _types = types,
         _weekdayText = weekdayText;
@@ -169,7 +165,6 @@ class _$OpeningHoursImpl implements _OpeningHours {
       _$$OpeningHoursImplFromJson(json);
 
   @override
-  @JsonKey(name: 'open_now')
   final bool? openNow;
   final List<OpeningHoursPeriod>? _periods;
   @override
@@ -182,7 +177,6 @@ class _$OpeningHoursImpl implements _OpeningHours {
   }
 
   @override
-  @JsonKey(name: 'special_days')
   final String? type;
   final List<String>? _types;
   @override
@@ -196,7 +190,6 @@ class _$OpeningHoursImpl implements _OpeningHours {
 
   final List<String>? _weekdayText;
   @override
-  @JsonKey(name: 'weekday_text')
   List<String>? get weekdayText {
     final value = _weekdayText;
     if (value == null) return null;
@@ -249,28 +242,24 @@ class _$OpeningHoursImpl implements _OpeningHours {
 
 abstract class _OpeningHours implements OpeningHours {
   const factory _OpeningHours(
-          {@JsonKey(name: 'open_now') final bool? openNow,
-          final List<OpeningHoursPeriod>? periods,
-          @JsonKey(name: 'special_days') final String? type,
-          final List<String>? types,
-          @JsonKey(name: 'weekday_text') final List<String>? weekdayText}) =
-      _$OpeningHoursImpl;
+      {final bool? openNow,
+      final List<OpeningHoursPeriod>? periods,
+      final String? type,
+      final List<String>? types,
+      final List<String>? weekdayText}) = _$OpeningHoursImpl;
 
   factory _OpeningHours.fromJson(Map<String, dynamic> json) =
       _$OpeningHoursImpl.fromJson;
 
   @override
-  @JsonKey(name: 'open_now')
   bool? get openNow;
   @override
   List<OpeningHoursPeriod>? get periods;
   @override
-  @JsonKey(name: 'special_days')
   String? get type;
   @override
   List<String>? get types;
   @override
-  @JsonKey(name: 'weekday_text')
   List<String>? get weekdayText;
   @override
   @JsonKey(ignore: true)
