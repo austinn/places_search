@@ -24,7 +24,7 @@ mixin _$Bounds {
   LatLngLiteral get southwest => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-   ignore: true)
+  @JsonKey(ignore: true)
   $BoundsCopyWith<Bounds> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -155,11 +155,11 @@ class _$BoundsImpl implements _Bounds {
                 other.southwest == southwest));
   }
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, northeast, southwest);
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$BoundsImplCopyWith<_$BoundsImpl> get copyWith =>
@@ -185,7 +185,7 @@ abstract class _Bounds implements Bounds {
   @override
   LatLngLiteral get southwest;
   @override
-   ignore: true)
+  @JsonKey(ignore: true)
   _$$BoundsImplCopyWith<_$BoundsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

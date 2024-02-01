@@ -24,7 +24,7 @@ mixin _$Terms {
   String get value => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-   ignore: true)
+  @JsonKey(ignore: true)
   $TermsCopyWith<Terms> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -129,11 +129,11 @@ class _$TermsImpl implements _Terms {
             (identical(other.value, value) || other.value == value));
   }
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, offset, value);
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$TermsImplCopyWith<_$TermsImpl> get copyWith =>
@@ -158,7 +158,7 @@ abstract class _Terms implements Terms {
   @override
   String get value;
   @override
-   ignore: true)
+  @JsonKey(ignore: true)
   _$$TermsImplCopyWith<_$TermsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -24,7 +24,7 @@ mixin _$Geometry {
   Bounds get viewport => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-   ignore: true)
+  @JsonKey(ignore: true)
   $GeometryCopyWith<Geometry> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -157,11 +157,11 @@ class _$GeometryImpl implements _Geometry {
                 other.viewport == viewport));
   }
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, location, viewport);
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GeometryImplCopyWith<_$GeometryImpl> get copyWith =>
@@ -188,7 +188,7 @@ abstract class _Geometry implements Geometry {
   @override
   Bounds get viewport;
   @override
-   ignore: true)
+  @JsonKey(ignore: true)
   _$$GeometryImplCopyWith<_$GeometryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -24,7 +24,7 @@ mixin _$OpeningHoursPeriod {
   OpeningHoursDetails? get close => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-   ignore: true)
+  @JsonKey(ignore: true)
   $OpeningHoursPeriodCopyWith<OpeningHoursPeriod> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -160,11 +160,11 @@ class _$OpeningHoursPeriodImpl implements _OpeningHoursPeriod {
             (identical(other.close, close) || other.close == close));
   }
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, open, close);
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$OpeningHoursPeriodImplCopyWith<_$OpeningHoursPeriodImpl> get copyWith =>
@@ -192,7 +192,7 @@ abstract class _OpeningHoursPeriod implements OpeningHoursPeriod {
   @override
   OpeningHoursDetails? get close;
   @override
-   ignore: true)
+  @JsonKey(ignore: true)
   _$$OpeningHoursPeriodImplCopyWith<_$OpeningHoursPeriodImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -25,7 +25,7 @@ mixin _$AddressComponent {
   List<String> get types => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-   ignore: true)
+  @JsonKey(ignore: true)
   $AddressComponentCopyWith<AddressComponent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -157,12 +157,12 @@ class _$AddressComponentImpl implements _AddressComponent {
             const DeepCollectionEquality().equals(other._types, _types));
   }
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, longName, shortName,
       const DeepCollectionEquality().hash(_types));
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AddressComponentImplCopyWith<_$AddressComponentImpl> get copyWith =>
@@ -193,7 +193,7 @@ abstract class _AddressComponent implements AddressComponent {
   @override
   List<String> get types;
   @override
-   ignore: true)
+  @JsonKey(ignore: true)
   _$$AddressComponentImplCopyWith<_$AddressComponentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

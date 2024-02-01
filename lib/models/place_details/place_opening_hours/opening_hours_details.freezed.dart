@@ -26,7 +26,7 @@ mixin _$OpeningHoursDetails {
   bool? get truncated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-   ignore: true)
+  @JsonKey(ignore: true)
   $OpeningHoursDetailsCopyWith<OpeningHoursDetails> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -162,11 +162,11 @@ class _$OpeningHoursDetailsImpl implements _OpeningHoursDetails {
                 other.truncated == truncated));
   }
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, day, time, date, truncated);
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$OpeningHoursDetailsImplCopyWith<_$OpeningHoursDetailsImpl> get copyWith =>
@@ -200,7 +200,7 @@ abstract class _OpeningHoursDetails implements OpeningHoursDetails {
   @override
   bool? get truncated;
   @override
-   ignore: true)
+  @JsonKey(ignore: true)
   _$$OpeningHoursDetailsImplCopyWith<_$OpeningHoursDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

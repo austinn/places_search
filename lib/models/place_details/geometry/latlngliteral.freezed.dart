@@ -24,7 +24,7 @@ mixin _$LatLngLiteral {
   double get lng => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-   ignore: true)
+  @JsonKey(ignore: true)
   $LatLngLiteralCopyWith<LatLngLiteral> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -132,11 +132,11 @@ class _$LatLngLiteralImpl implements _LatLngLiteral {
             (identical(other.lng, lng) || other.lng == lng));
   }
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, lat, lng);
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LatLngLiteralImplCopyWith<_$LatLngLiteralImpl> get copyWith =>
@@ -163,7 +163,7 @@ abstract class _LatLngLiteral implements LatLngLiteral {
   @override
   double get lng;
   @override
-   ignore: true)
+  @JsonKey(ignore: true)
   _$$LatLngLiteralImplCopyWith<_$LatLngLiteralImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

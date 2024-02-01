@@ -24,7 +24,7 @@ mixin _$MatchedSubstring {
   num get offset => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-   ignore: true)
+  @JsonKey(ignore: true)
   $MatchedSubstringCopyWith<MatchedSubstring> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -132,11 +132,11 @@ class _$MatchedSubstringImpl implements _MatchedSubstring {
             (identical(other.offset, offset) || other.offset == offset));
   }
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, length, offset);
 
-   ignore: true)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MatchedSubstringImplCopyWith<_$MatchedSubstringImpl> get copyWith =>
@@ -164,7 +164,7 @@ abstract class _MatchedSubstring implements MatchedSubstring {
   @override
   num get offset;
   @override
-   ignore: true)
+  @JsonKey(ignore: true)
   _$$MatchedSubstringImplCopyWith<_$MatchedSubstringImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
