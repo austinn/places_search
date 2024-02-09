@@ -162,7 +162,11 @@ class PlaceAutoCompleteTextFieldState extends State<PlaceAutoCompleteTextField> 
                               }
                             },
                             child: Container(
-                                padding: const EdgeInsets.all(10), child: Text(alPredictions[index].description)),
+                                padding: const EdgeInsets.all(10),
+                                child: Text(
+                                  alPredictions[index].description,
+                                  style: widget.textStyle,
+                                )),
                           );
                         },
                       )),
