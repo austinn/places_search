@@ -10,7 +10,7 @@ part 'structured_formatting.g.dart';
 class StructuredFormatting with _$StructuredFormatting {
   factory StructuredFormatting({
     required String mainText,
-    required List<MatchedSubstring> mainTextMatchedSubstrings,
+    List<MatchedSubstring>? mainTextMatchedSubstrings,
     String? secondaryText,
     List<MatchedSubstring>? secondaryTextMatchedSubstrings,
   }) = _StructuredFormatting;

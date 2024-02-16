@@ -21,7 +21,7 @@ StructuredFormatting _$StructuredFormattingFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$StructuredFormatting {
   String get mainText => throw _privateConstructorUsedError;
-  List<MatchedSubstring> get mainTextMatchedSubstrings =>
+  List<MatchedSubstring>? get mainTextMatchedSubstrings =>
       throw _privateConstructorUsedError;
   String? get secondaryText => throw _privateConstructorUsedError;
   List<MatchedSubstring>? get secondaryTextMatchedSubstrings =>
@@ -41,7 +41,7 @@ abstract class $StructuredFormattingCopyWith<$Res> {
   @useResult
   $Res call(
       {String mainText,
-      List<MatchedSubstring> mainTextMatchedSubstrings,
+      List<MatchedSubstring>? mainTextMatchedSubstrings,
       String? secondaryText,
       List<MatchedSubstring>? secondaryTextMatchedSubstrings});
 }
@@ -61,7 +61,7 @@ class _$StructuredFormattingCopyWithImpl<$Res,
   @override
   $Res call({
     Object? mainText = null,
-    Object? mainTextMatchedSubstrings = null,
+    Object? mainTextMatchedSubstrings = freezed,
     Object? secondaryText = freezed,
     Object? secondaryTextMatchedSubstrings = freezed,
   }) {
@@ -70,10 +70,10 @@ class _$StructuredFormattingCopyWithImpl<$Res,
           ? _value.mainText
           : mainText // ignore: cast_nullable_to_non_nullable
               as String,
-      mainTextMatchedSubstrings: null == mainTextMatchedSubstrings
+      mainTextMatchedSubstrings: freezed == mainTextMatchedSubstrings
           ? _value.mainTextMatchedSubstrings
           : mainTextMatchedSubstrings // ignore: cast_nullable_to_non_nullable
-              as List<MatchedSubstring>,
+              as List<MatchedSubstring>?,
       secondaryText: freezed == secondaryText
           ? _value.secondaryText
           : secondaryText // ignore: cast_nullable_to_non_nullable
@@ -96,7 +96,7 @@ abstract class _$$StructuredFormattingImplCopyWith<$Res>
   @useResult
   $Res call(
       {String mainText,
-      List<MatchedSubstring> mainTextMatchedSubstrings,
+      List<MatchedSubstring>? mainTextMatchedSubstrings,
       String? secondaryText,
       List<MatchedSubstring>? secondaryTextMatchedSubstrings});
 }
@@ -113,7 +113,7 @@ class __$$StructuredFormattingImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? mainText = null,
-    Object? mainTextMatchedSubstrings = null,
+    Object? mainTextMatchedSubstrings = freezed,
     Object? secondaryText = freezed,
     Object? secondaryTextMatchedSubstrings = freezed,
   }) {
@@ -122,10 +122,10 @@ class __$$StructuredFormattingImplCopyWithImpl<$Res>
           ? _value.mainText
           : mainText // ignore: cast_nullable_to_non_nullable
               as String,
-      mainTextMatchedSubstrings: null == mainTextMatchedSubstrings
+      mainTextMatchedSubstrings: freezed == mainTextMatchedSubstrings
           ? _value._mainTextMatchedSubstrings
           : mainTextMatchedSubstrings // ignore: cast_nullable_to_non_nullable
-              as List<MatchedSubstring>,
+              as List<MatchedSubstring>?,
       secondaryText: freezed == secondaryText
           ? _value.secondaryText
           : secondaryText // ignore: cast_nullable_to_non_nullable
@@ -143,7 +143,7 @@ class __$$StructuredFormattingImplCopyWithImpl<$Res>
 class _$StructuredFormattingImpl implements _StructuredFormatting {
   _$StructuredFormattingImpl(
       {required this.mainText,
-      required final List<MatchedSubstring> mainTextMatchedSubstrings,
+      final List<MatchedSubstring>? mainTextMatchedSubstrings,
       this.secondaryText,
       final List<MatchedSubstring>? secondaryTextMatchedSubstrings})
       : _mainTextMatchedSubstrings = mainTextMatchedSubstrings,
@@ -154,13 +154,15 @@ class _$StructuredFormattingImpl implements _StructuredFormatting {
 
   @override
   final String mainText;
-  final List<MatchedSubstring> _mainTextMatchedSubstrings;
+  final List<MatchedSubstring>? _mainTextMatchedSubstrings;
   @override
-  List<MatchedSubstring> get mainTextMatchedSubstrings {
+  List<MatchedSubstring>? get mainTextMatchedSubstrings {
+    final value = _mainTextMatchedSubstrings;
+    if (value == null) return null;
     if (_mainTextMatchedSubstrings is EqualUnmodifiableListView)
       return _mainTextMatchedSubstrings;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_mainTextMatchedSubstrings);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -225,7 +227,7 @@ class _$StructuredFormattingImpl implements _StructuredFormatting {
 abstract class _StructuredFormatting implements StructuredFormatting {
   factory _StructuredFormatting(
           {required final String mainText,
-          required final List<MatchedSubstring> mainTextMatchedSubstrings,
+          final List<MatchedSubstring>? mainTextMatchedSubstrings,
           final String? secondaryText,
           final List<MatchedSubstring>? secondaryTextMatchedSubstrings}) =
       _$StructuredFormattingImpl;
@@ -236,7 +238,7 @@ abstract class _StructuredFormatting implements StructuredFormatting {
   @override
   String get mainText;
   @override
-  List<MatchedSubstring> get mainTextMatchedSubstrings;
+  List<MatchedSubstring>? get mainTextMatchedSubstrings;
   @override
   String? get secondaryText;
   @override
