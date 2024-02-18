@@ -82,7 +82,6 @@ class PlaceAutoCompleteTextFieldAlternativeState extends State<PlaceAutoComplete
     );
 
     if (text.isEmpty) {
-      debugPrint('empty so removing');
       alPredictions.clear();
       _overlayEntry!.remove();
       return;
@@ -169,7 +168,6 @@ class PlaceAutoCompleteTextFieldAlternativeState extends State<PlaceAutoComplete
   removeOverlay() {
     try {
       alPredictions.clear();
-      debugPrint('cleared');
       _overlayEntry = _createOverlayEntry();
       Overlay.of(context).insert(_overlayEntry!);
       _overlayEntry!.markNeedsBuild();
