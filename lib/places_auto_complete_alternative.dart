@@ -1,14 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:places_search/models/place_details/place_details.dart';
-import 'package:places_search/models/places_response.dart';
-import 'package:places_search/models/prediction/prediction.dart';
+import 'package:google_maps_webservice/places.dart';
+import 'package:places_search/models/place_details/place_details.dart' as mine;
 import 'package:rxdart/rxdart.dart';
 
-class PlaceAutoCompleteTextField extends StatefulWidget {
+class PlaceAutoCompleteTextFieldAlternative extends StatefulWidget {
   final InputDecoration inputDecoration;
-  final ValueChanged<Prediction>? onItemClicked;
-  final ValueChanged<(Prediction, PlaceDetails)>? getPlaceDetails;
+  final ValueChanged<PlacesSearchResult>? onItemClicked;
+  final ValueChanged<(PlacesSearchResult, mine.PlaceDetails, (double, double))>? getPlaceDetails;
   final bool isLatLngRequired;
 
   final TextStyle textStyle;
@@ -16,8 +15,9 @@ class PlaceAutoCompleteTextField extends StatefulWidget {
   final int debounceTime;
   final List<String> countries;
   final TextEditingController textEditingController;
+  final (double, double) currentLocation;
 
-  const PlaceAutoCompleteTextField({
+  const PlaceAutoCompleteTextFieldAlternative({
     super.key,
     required this.textEditingController,
     required this.googleAPIKey,
@@ -28,16 +28,17 @@ class PlaceAutoCompleteTextField extends StatefulWidget {
     this.isLatLngRequired = true,
     this.textStyle = const TextStyle(),
     this.countries = const ['us'],
+    required this.currentLocation,
   });
 
   @override
-  PlaceAutoCompleteTextFieldState createState() => PlaceAutoCompleteTextFieldState();
+  PlaceAutoCompleteTextFieldAlternativeState createState() => PlaceAutoCompleteTextFieldAlternativeState();
 }
 
-class PlaceAutoCompleteTextFieldState extends State<PlaceAutoCompleteTextField> {
+class PlaceAutoCompleteTextFieldAlternativeState extends State<PlaceAutoCompleteTextFieldAlternative> {
   final subject = PublishSubject<String>();
   OverlayEntry? _overlayEntry;
-  List<Prediction> alPredictions = [];
+  List<PlacesSearchResult> alPredictions = [];
   bool isLoading = false;
 
   TextEditingController controller = TextEditingController();
@@ -73,34 +74,24 @@ class PlaceAutoCompleteTextFieldState extends State<PlaceAutoCompleteTextField> 
   }
 
   getLocation(String text) async {
-    Dio dio = Dio();
-    String url =
-        'https://corsproxy.io/?https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=${widget.googleAPIKey}';
+    final places = GoogleMapsPlaces(apiKey: widget.googleAPIKey);
+    final location = Location(lat: widget.currentLocation.$1, lng: widget.currentLocation.$2);
+    PlacesSearchResponse response = await places.searchByText(
+      text,
+      location: location,
+    );
 
-    for (int i = 0; i < widget.countries.length; i++) {
-      String country = widget.countries[i];
-
-      if (i == 0) {
-        url = '$url&components=country:$country';
-      } else {
-        url = '$url|country:$country';
-      }
-    }
-
-    Response response = await dio.get(url);
-
-    PlacesResponse subscriptionResponse = PlacesResponse.fromJson(response.data);
     if (text.isEmpty) {
+      debugPrint('empty so removing');
       alPredictions.clear();
-      debugPrint('frick u');
       _overlayEntry!.remove();
       return;
     }
 
     isSearched = false;
-    if (subscriptionResponse.predictions.isNotEmpty) {
+    if (response.results.isNotEmpty) {
       alPredictions.clear();
-      alPredictions.addAll(subscriptionResponse.predictions);
+      alPredictions.addAll(response.results);
     }
     _overlayEntry = null;
     _overlayEntry = _createOverlayEntry();
@@ -137,36 +128,38 @@ class PlaceAutoCompleteTextFieldState extends State<PlaceAutoCompleteTextField> 
                   link: _layerLink,
                   offset: Offset(0.0, size.height + 5.0),
                   child: Material(
-                      elevation: 1.0,
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        itemCount: alPredictions.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            onTap: () {
-                              if (index < alPredictions.length) {
-                                if (widget.onItemClicked != null) {
-                                  widget.onItemClicked!(alPredictions[index]);
-                                }
-                                if (!widget.isLatLngRequired) return;
-
-                                getPlaceDetailsFromPlaceId(
-                                  alPredictions[index],
-                                );
-
-                                removeOverlay();
+                    elevation: 1.0,
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: alPredictions.length <= 5 ? alPredictions.length : 5,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            if (index < alPredictions.length) {
+                              if (widget.onItemClicked != null) {
+                                widget.onItemClicked!(alPredictions[index]);
                               }
-                            },
-                            child: Container(
-                                padding: const EdgeInsets.all(10),
-                                child: Text(
-                                  alPredictions[index].description,
-                                  style: widget.textStyle,
-                                )),
-                          );
-                        },
-                      )),
+                              if (!widget.isLatLngRequired) return;
+                              try {
+                                getPlaceDetailsFromPlaceId(alPredictions[index]);
+                                removeOverlay();
+                              } catch (e, s) {
+                                debugPrint(e.toString());
+                                debugPrint(s.toString());
+                              }
+                            }
+                          },
+                          child: Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                '${alPredictions[index].name}, ${alPredictions[index].formattedAddress ?? ''}',
+                                style: widget.textStyle,
+                              )),
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ));
     }
@@ -174,26 +167,30 @@ class PlaceAutoCompleteTextFieldState extends State<PlaceAutoCompleteTextField> 
   }
 
   removeOverlay() {
-    alPredictions.clear();
-    _overlayEntry = _createOverlayEntry();
-    Overlay.of(context).insert(_overlayEntry!);
-    _overlayEntry!.markNeedsBuild();
+    try {
+      alPredictions.clear();
+      debugPrint('cleared');
+      _overlayEntry = _createOverlayEntry();
+      Overlay.of(context).insert(_overlayEntry!);
+      _overlayEntry!.markNeedsBuild();
+    } catch (e, s) {
+      debugPrint(e.toString());
+      debugPrint(s.toString());
+    }
   }
 
-  Future<Response?> getPlaceDetailsFromPlaceId(Prediction prediction) async {
+  Future<Response?> getPlaceDetailsFromPlaceId(PlacesSearchResult prediction) async {
     var url =
         'https://corsproxy.io/?https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}';
 
     Response response = await Dio().get(
       url,
     );
-    PlaceDetails placeDetails = PlaceDetails.fromJson(response.data);
-    prediction = prediction.copyWith(
-      lat: placeDetails.result.geometry?.location.lat.toString(),
-      lng: placeDetails.result.geometry?.location.lng.toString(),
-    );
+    mine.PlaceDetails placeDetails = mine.PlaceDetails.fromJson(response.data);
+    final latlng = (placeDetails.result.geometry?.location.lat ?? 0, placeDetails.result.geometry?.location.lng ?? 0);
+
     if (widget.getPlaceDetails != null) {
-      widget.getPlaceDetails!((prediction, placeDetails));
+      widget.getPlaceDetails!((prediction, placeDetails, latlng));
     }
     return null;
   }
