@@ -1,11 +1,15 @@
-import 'package:dio/dio.dart';
+import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:owl/widgets/async/item_list_builder.dart';
 import 'package:places_search/models/place_details/place_details.dart';
-import 'package:places_search/models/places_response.dart';
 import 'package:places_search/models/prediction/prediction.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:places_search/places_notifier.dart';
+import 'package:places_search/places_repository.dart';
+import 'package:places_search/shimmer_loading_tile.dart';
 
-class PlaceAutoCompleteTextField extends StatefulWidget {
+class PlaceAutoCompleteTextField extends HookConsumerWidget {
   final InputDecoration inputDecoration;
   final ValueChanged<Prediction>? onItemClicked;
   final ValueChanged<(Prediction, PlaceDetails)>? getPlaceDetails;
@@ -31,26 +35,116 @@ class PlaceAutoCompleteTextField extends StatefulWidget {
   });
 
   @override
-  PlaceAutoCompleteTextFieldState createState() => PlaceAutoCompleteTextFieldState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final layerLink = useState(LayerLink());
+    final overlay = useState<OverlayEntry?>(null);
+    final state = ref.watch(placesItemListNotifierProvider(key));
 
-class PlaceAutoCompleteTextFieldState extends State<PlaceAutoCompleteTextField> {
-  final subject = PublishSubject<String>();
-  OverlayEntry? _overlayEntry;
-  List<Prediction> alPredictions = [];
-  bool isLoading = false;
+    OverlayEntry? createOverlayEntry() {
+      if (context.findRenderObject() != null) {
+        RenderBox renderBox = context.findRenderObject() as RenderBox;
+        var size = renderBox.size;
+        var offset = renderBox.localToGlobal(Offset.zero);
+        return OverlayEntry(
+          builder: (context) => Positioned(
+            left: offset.dx,
+            top: size.height + offset.dy,
+            width: size.width,
+            child: CompositedTransformFollower(
+              showWhenUnlinked: false,
+              link: layerLink.value,
+              offset: Offset(0.0, size.height + 5.0),
+              child: DecoratedBox(
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 8,
+                    offset: const Offset(-4, 8),
+                  ),
+                ]),
+                child: Card(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  )),
+                  elevation: 0,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(8),
+                      bottomRight: Radius.circular(8),
+                    ),
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        return ItemListBuilder(
+                          value: ref.watch(placesItemListNotifierProvider(key)),
+                          physics: (state.hasValue && state.value!.isEmpty)
+                              ? const NeverScrollableScrollPhysics()
+                              : const AlwaysScrollableScrollPhysics(),
+                          loadingBuilder: (context) => ListView(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: List.generate(
+                              5,
+                              (index) => ShimmerLoadingTile(index: index, textStyle: textStyle),
+                            ),
+                          ),
+                          itemBuilder: (context, prediction, index) {
+                            final length = state.value?.length ?? 0;
+                            return Entry(
+                              duration: const Duration(milliseconds: 100),
+                              curve: Curves.ease,
+                              opacity: 0,
+                              key: ValueKey(prediction.placeId),
+                              child: Padding(
+                                padding: const EdgeInsets.all(2),
+                                child: Card(
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(8),
+                                    onTap: () {
+                                      if (index < length) {
+                                        if (onItemClicked != null) {
+                                          onItemClicked!(prediction);
+                                        }
+                                        overlay.value!.remove();
+                                        overlay.value = null;
+                                        if (!isLatLngRequired) return;
+                                        ref.read(placesRepositoryProvider).getPlaceDetailsFromPlaceId(
+                                              prediction,
+                                              getPlaceDetails,
+                                              googleAPIKey,
+                                            );
+                                      }
+                                    },
+                                    child: Container(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Text(
+                                          prediction.description,
+                                          style: textStyle,
+                                        )),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+      return null;
+    }
 
-  TextEditingController controller = TextEditingController();
-  final LayerLink _layerLink = LayerLink();
-  bool isSearched = false;
-
-  @override
-  Widget build(BuildContext context) {
     return CompositedTransformTarget(
-      link: _layerLink,
+      link: layerLink.value,
       child: TextFormField(
-        decoration: widget.inputDecoration.copyWith(
-          suffix: isLoading
+        decoration: inputDecoration.copyWith(
+          suffix: state.isLoading
               ? const SizedBox(
                   height: 18,
                   width: 18,
@@ -58,143 +152,27 @@ class PlaceAutoCompleteTextFieldState extends State<PlaceAutoCompleteTextField> 
                     strokeWidth: 2.0,
                   ),
                 )
-              : widget.inputDecoration.suffix,
+              : inputDecoration.suffix,
         ),
-        style: widget.textStyle,
-        controller: widget.textEditingController,
-        onChanged: (string) {
-          setState(() {
-            isLoading = string.isNotEmpty;
-          });
-          subject.add(string);
+        style: textStyle,
+        controller: textEditingController,
+        onChanged: (v) async {
+          if (v.isEmpty && overlay.value != null) {
+            overlay.value!.remove();
+            overlay.value = null;
+          }
+          if (v.isNotEmpty && overlay.value == null) {
+            overlay.value = createOverlayEntry();
+            Overlay.of(context).insert(overlay.value!);
+          }
+          ref.read(placesItemListNotifierProvider(key).notifier).searchInventoryItems(
+                v,
+                countries,
+                googleAPIKey,
+                debounceTime,
+              );
         },
       ),
     );
-  }
-
-  getLocation(String text) async {
-    Dio dio = Dio();
-    String url =
-        'https://corsproxy.io/?https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=${widget.googleAPIKey}';
-
-    for (int i = 0; i < widget.countries.length; i++) {
-      String country = widget.countries[i];
-
-      if (i == 0) {
-        url = '$url&components=country:$country';
-      } else {
-        url = '$url|country:$country';
-      }
-    }
-
-    Response response = await dio.get(url);
-
-    PlacesResponse subscriptionResponse = PlacesResponse.fromJson(response.data);
-    if (text.isEmpty) {
-      alPredictions.clear();
-      debugPrint('frick u');
-      _overlayEntry!.remove();
-      return;
-    }
-
-    isSearched = false;
-    if (subscriptionResponse.predictions.isNotEmpty) {
-      alPredictions.clear();
-      alPredictions.addAll(subscriptionResponse.predictions);
-    }
-    _overlayEntry = null;
-    _overlayEntry = _createOverlayEntry();
-    if (context.mounted) {
-      Overlay.of(context).insert(_overlayEntry!);
-    }
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    subject.stream.distinct().debounceTime(Duration(milliseconds: widget.debounceTime)).listen(textChanged);
-  }
-
-  textChanged(String text) async {
-    getLocation(text);
-  }
-
-  OverlayEntry? _createOverlayEntry() {
-    if (context.findRenderObject() != null) {
-      RenderBox renderBox = context.findRenderObject() as RenderBox;
-      var size = renderBox.size;
-      var offset = renderBox.localToGlobal(Offset.zero);
-      return OverlayEntry(
-          builder: (context) => Positioned(
-                left: offset.dx,
-                top: size.height + offset.dy,
-                width: size.width,
-                child: CompositedTransformFollower(
-                  showWhenUnlinked: false,
-                  link: _layerLink,
-                  offset: Offset(0.0, size.height + 5.0),
-                  child: Material(
-                      elevation: 1.0,
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        itemCount: alPredictions.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            onTap: () {
-                              if (index < alPredictions.length) {
-                                if (widget.onItemClicked != null) {
-                                  widget.onItemClicked!(alPredictions[index]);
-                                }
-                                if (!widget.isLatLngRequired) return;
-
-                                getPlaceDetailsFromPlaceId(
-                                  alPredictions[index],
-                                );
-
-                                removeOverlay();
-                              }
-                            },
-                            child: Container(
-                                padding: const EdgeInsets.all(10),
-                                child: Text(
-                                  alPredictions[index].description,
-                                  style: widget.textStyle,
-                                )),
-                          );
-                        },
-                      )),
-                ),
-              ));
-    }
-    return null;
-  }
-
-  removeOverlay() {
-    alPredictions.clear();
-    _overlayEntry = _createOverlayEntry();
-    Overlay.of(context).insert(_overlayEntry!);
-    _overlayEntry!.markNeedsBuild();
-  }
-
-  Future<Response?> getPlaceDetailsFromPlaceId(Prediction prediction) async {
-    var url =
-        'https://corsproxy.io/?https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}';
-
-    Response response = await Dio().get(
-      url,
-    );
-    PlaceDetails placeDetails = PlaceDetails.fromJson(response.data);
-    prediction = prediction.copyWith(
-      lat: placeDetails.result.geometry?.location.lat.toString(),
-      lng: placeDetails.result.geometry?.location.lng.toString(),
-    );
-    if (widget.getPlaceDetails != null) {
-      widget.getPlaceDetails!((prediction, placeDetails));
-    }
-    return null;
   }
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'package:flutter_google_places_sdk/flutter_google_places_sdk.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:places_search/models/prediction/matched_substring.dart';
 import 'package:places_search/models/prediction/structured_formatting.dart';
@@ -26,4 +27,19 @@ class Prediction with _$Prediction {
   }) = _Prediction;
 
   factory Prediction.fromJson(Map<String, Object?> json) => _$PredictionFromJson(json);
+
+  factory Prediction.fromAutocompletePrediction(AutocompletePrediction response) {
+    return Prediction(
+      description: response.fullText,
+      matchedSubstrings: [],
+      structuredFormatting: StructuredFormatting(
+        mainText: response.primaryText,
+        secondaryText: response.secondaryText,
+      ),
+      terms: [],
+      types: [],
+      placeId: response.placeId,
+      distanceMeters: (response.distanceMeters ?? 0).toString(),
+    );
+  }
 }

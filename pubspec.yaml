@@ -2,9 +2,9 @@ name: places_search
 description: Custom Google places autocomplete widget for Android and iOS
 version: 1.0.0
 homepage: https://github.com/jslattery26Packages/Google-AutoComplete-TextField-Flutter
-
+publish_to: none
 environment:
-  sdk: '>=3.0.2 <4.0.0'
+  sdk: ">=3.0.2 <4.0.0"
 
 dependencies:
   flutter:
@@ -15,9 +15,14 @@ dependencies:
   riverpod_annotation: ^2.3.1
   json_annotation: ^4.8.1
   hooks_riverpod: ^2.4.10
-  google_maps_webservice: ^0.0.20-nullsafety.5
   flutter_hooks: ^0.20.5
   flutter_use: ^0.0.4
+  flutter_google_places_sdk: ^0.3.8
+  owl:
+    git:
+      url: https://github.com/innovative-owl/owl.dart.git
+  entry: ^1.0.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   custom_lint: ^0.5.7
