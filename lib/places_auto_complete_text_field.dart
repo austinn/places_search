@@ -76,8 +76,9 @@ class PlaceAutoCompleteTextField extends HookConsumerWidget {
                     ),
                     child: Consumer(
                       builder: (context, ref, child) {
+                        final innerState = ref.watch(placesItemListNotifierProvider(key));
                         return ItemListBuilder(
-                          value: ref.watch(placesItemListNotifierProvider(key)),
+                          value: innerState,
                           physics: (state.hasValue && state.value!.isEmpty)
                               ? const NeverScrollableScrollPhysics()
                               : const AlwaysScrollableScrollPhysics(),
@@ -90,7 +91,7 @@ class PlaceAutoCompleteTextField extends HookConsumerWidget {
                             ),
                           ),
                           itemBuilder: (context, prediction, index) {
-                            final length = state.value?.length ?? 0;
+                            final length = innerState.value?.length ?? 0;
                             return Entry(
                               duration: const Duration(milliseconds: 100),
                               curve: Curves.ease,
@@ -101,19 +102,21 @@ class PlaceAutoCompleteTextField extends HookConsumerWidget {
                                 child: Card(
                                   child: InkWell(
                                     borderRadius: BorderRadius.circular(8),
-                                    onTap: () {
+                                    onTap: () async {
                                       if (index < length) {
                                         if (onItemClicked != null) {
                                           onItemClicked!(prediction);
                                         }
+                                        if (!isLatLngRequired) {
+                                          return;
+                                        }
+                                        final result = await ref
+                                            .read(placesRepositoryProvider)
+                                            .getPlaceDetailsFromPlaceId(prediction, googleAPIKey);
+
+                                        getPlaceDetails?.call(result);
                                         overlay.value!.remove();
                                         overlay.value = null;
-                                        if (!isLatLngRequired) return;
-                                        ref.read(placesRepositoryProvider).getPlaceDetailsFromPlaceId(
-                                              prediction,
-                                              getPlaceDetails,
-                                              googleAPIKey,
-                                            );
                                       }
                                     },
                                     child: Container(

@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_google_places_sdk/flutter_google_places_sdk.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:places_search/models/place_details/place_details.dart';
 import 'package:places_search/models/places_response.dart';
-import 'package:places_search/models/prediction/prediction.dart';
+import 'package:places_search/places_search.dart';
 import 'package:places_search/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -55,9 +54,8 @@ class PlacesRepository {
     return url;
   }
 
-  Future<Response?> getPlaceDetailsFromPlaceId(
+  Future<(Prediction, PlaceDetails)> getPlaceDetailsFromPlaceId(
     Prediction prediction,
-    Function((Prediction, PlaceDetails))? getPlaceDetails,
     String googleApiKey,
   ) async {
     var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=$googleApiKey';
@@ -70,9 +68,6 @@ class PlacesRepository {
       lat: placeDetails.result.geometry?.location.lat.toString(),
       lng: placeDetails.result.geometry?.location.lng.toString(),
     );
-    if (getPlaceDetails != null) {
-      getPlaceDetails((prediction, placeDetails));
-    }
-    return null;
+    return (prediction, placeDetails);
   }
 }
