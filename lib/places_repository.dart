@@ -70,4 +70,42 @@ class PlacesRepository {
     );
     return (prediction, placeDetails);
   }
+
+  Future<(Prediction, PlaceDetails)?> getPlaceDetailsFromPlaceIdForWeb(
+    Prediction prediction,
+    String googleApiKey,
+  ) async {
+    final sdk = FlutterGooglePlacesSdk(googleApiKey);
+    final isInitialized = await sdk.isInitialized();
+    if (isInitialized == null || !isInitialized || prediction.placeId == null) {
+      return null;
+    }
+    final placeDetails = await sdk.fetchPlace(prediction.placeId!, fields: [
+      PlaceField.Address,
+      PlaceField.AddressComponents,
+      PlaceField.BusinessStatus,
+      PlaceField.Id,
+      PlaceField.Location,
+      PlaceField.Name,
+      PlaceField.OpeningHours,
+      PlaceField.PhoneNumber,
+      PlaceField.PhotoMetadatas,
+      PlaceField.PlusCode,
+      PlaceField.PriceLevel,
+      PlaceField.Rating,
+      PlaceField.Types,
+      PlaceField.UserRatingsTotal,
+      PlaceField.UTCOffset,
+      PlaceField.Viewport,
+      PlaceField.WebsiteUri
+    ]);
+
+    final converted = PlaceDetails.fromFetchPlaceResponse(placeDetails);
+
+    prediction = prediction.copyWith(
+      lat: converted.result.geometry?.location.lat.toString(),
+      lng: converted.result.geometry?.location.lng.toString(),
+    );
+    return (prediction, PlaceDetails.fromFetchPlaceResponse(placeDetails));
+  }
 }

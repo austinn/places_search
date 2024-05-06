@@ -1,15 +1,16 @@
 import 'package:entry/entry.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:owl/widgets/async/item_list_builder.dart';
+import 'package:owl/owl.dart';
 import 'package:places_search/models/place_details/place_details.dart';
 import 'package:places_search/models/prediction/prediction.dart';
 import 'package:places_search/places_notifier.dart';
 import 'package:places_search/places_repository.dart';
 import 'package:places_search/shimmer_loading_tile.dart';
 
-class PlaceAutoCompleteTextField extends HookConsumerWidget {
+class PlaceAutoCompleteTextField extends HookConsumerWidget with LoggerMixin {
   final InputDecoration inputDecoration;
   final ValueChanged<Prediction>? onItemClicked;
   final ValueChanged<(Prediction, PlaceDetails)>? getPlaceDetails;
@@ -110,13 +111,26 @@ class PlaceAutoCompleteTextField extends HookConsumerWidget {
                                         if (!isLatLngRequired) {
                                           return;
                                         }
-                                        final result = await ref
-                                            .read(placesRepositoryProvider)
-                                            .getPlaceDetailsFromPlaceId(prediction, googleAPIKey);
+                                        try {
+                                          final (Prediction, PlaceDetails)? result;
+                                          if (kIsWeb) {
+                                            result = await ref
+                                                .read(placesRepositoryProvider)
+                                                .getPlaceDetailsFromPlaceIdForWeb(prediction, googleAPIKey);
+                                          } else {
+                                            result = await ref
+                                                .read(placesRepositoryProvider)
+                                                .getPlaceDetailsFromPlaceId(prediction, googleAPIKey);
+                                          }
+                                          if (result != null && getPlaceDetails != null) {
+                                            getPlaceDetails?.call(result);
+                                          }
 
-                                        getPlaceDetails?.call(result);
-                                        overlay.value!.remove();
-                                        overlay.value = null;
+                                          overlay.value!.remove();
+                                          overlay.value = null;
+                                        } catch (e) {
+                                          log.warning(e);
+                                        }
                                       }
                                     },
                                     child: Container(
