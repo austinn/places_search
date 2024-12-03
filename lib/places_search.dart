@@ -1,6 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
-library places_search;
+library;
 
 export 'models/place_details/place_details.dart';
 export 'models/prediction/prediction.dart';
