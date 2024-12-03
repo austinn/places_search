@@ -17,7 +17,7 @@ dependencies:
   hooks_riverpod: ^2.4.10
   flutter_hooks: ^0.20.5
   flutter_use: ^0.0.4
-  flutter_google_places_sdk: ^0.3.8
+  flutter_google_places_sdk: ^0.3.9
   owl:
     git:
       url: https://github.com/innovative-owl/owl.dart.git
